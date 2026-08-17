@@ -52,13 +52,12 @@ export function Reveal({
 }) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 24 }}
+      initial={{ opacity: 0, y: 16 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-10% 0px" }}
+      viewport={{ once: true }}
       transition={{
-        type: "spring",
-        stiffness: 100,
-        damping: 20,
+        duration: 0.45,
+        ease: [0.21, 0.47, 0.32, 0.98],
         delay,
       }}
       className={className}

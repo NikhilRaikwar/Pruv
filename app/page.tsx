@@ -20,7 +20,7 @@ export default function LandingPage() {
             <Link href="/start" className="btn btn-primary" style={{borderRadius: '10px', padding: '11px 22px', fontSize: '13.5px', fontWeight: 600, display: 'inline-flex', alignItems: 'center', textDecoration: 'none'}}>
               Start a Proof Review
             </Link>
-            <Link href="https://github.com" target="_blank" rel="noopener noreferrer" style={{display: 'inline-flex', alignItems: 'center', gap: '8px', fontSize: '14px', color: 'var(--ink)', fontWeight: 500}}>
+            <Link href="https://github.com/NikhilRaikwar/Pruv" target="_blank" rel="noopener noreferrer" style={{display: 'inline-flex', alignItems: 'center', gap: '8px', fontSize: '14px', color: 'var(--ink)', fontWeight: 500}}>
               <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
               GitHub
             </Link>
@@ -75,7 +75,7 @@ export default function LandingPage() {
                 </div>
                 <div className="product-row" style={{display: 'flex', gap: '20px', alignItems: 'center', marginBottom: '24px'}}>
                   <div className="product-img" style={{width: '74px', height: '98px', position: 'relative', background: '#F8F8F8', borderRadius: '8px', overflow: 'hidden', flexShrink: 0}}>
-                    <Image src="/serum.jpg" alt="Serum" fill style={{objectFit: 'cover'}} />
+                    <Image src="/serum_bottle_review.jpg" alt="Serum" fill style={{objectFit: 'cover'}} />
                   </div>
                   <div className="product-info" style={{flex: 1}}>
                     <h4 style={{fontSize: '16px', fontWeight: 700, color: 'var(--ink)', marginBottom: '3px'}}>Niacinamide 10% Serum</h4>
@@ -130,16 +130,26 @@ export default function LandingPage() {
                   </div>
                 </div>
 
-                <div className="proof-footer" style={{marginTop: '20px', display: 'flex', alignItems: 'center', gap: '6px', fontSize: '11.5px', color: 'var(--muted)'}}>
-                  Measured with YouCam Skin AI 🪄
+                <div className="quote-box" style={{background: 'var(--bg-subtle)', borderRadius: '12px', padding: '14px 16px', margin: '20px 0 16px', border: '1px solid var(--line)'}}>
+                  <p style={{fontSize: '13.5px', fontStyle: 'italic', color: 'var(--ink-soft)', margin: 0, lineHeight: 1.5}}>
+                    “My skin feels much calmer and visibly less red around cheeks.”
+                  </p>
+                </div>
+
+                <div className="proof-footer" style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '11px', color: 'var(--muted)', paddingTop: '12px', borderTop: '1px solid var(--line)'}}>
+                  <div className="scan-pill" style={{display: 'flex', alignItems: 'center', gap: '4px'}}>
+                    <span className="dot" style={{width: '6px', height: '6px', borderRadius: '50%', background: '#16A34A'}}></span>
+                    2 scans verified
+                  </div>
+                  <span>Measured with YouCam Skin AI 🪄</span>
                 </div>
               </div>
             </Reveal>
           </div>
         </section>
 
-        {/* STEPS SECTION */}
-        <section id="how">
+        {/* 3 STEPS SECTION */}
+        <section id="how" style={{padding: '90px 0', borderTop: '1px solid var(--line)', borderBottom: '1px solid var(--line)', background: 'var(--bg)'}}>
           <div className="wrap">
             <Reveal>
               <div className="section-head" style={{maxWidth: '800px', margin: '0 auto 80px', textAlign: 'center'}}>
@@ -192,9 +202,9 @@ export default function LandingPage() {
                 <p style={{fontSize: '15px', color: 'var(--ink-soft)', lineHeight: 1.6, margin: '24px 0 28px'}}>
                   Pruv adds a bit you that compares two scans with YouCam Texture and between them to turn the numbers.
                 </p>
-                <button className="btn btn-outline" style={{background: '#FFF', borderRadius: '9999px', padding: '14px 26px', fontWeight: 600, fontSize: '14px', boxShadow: '0 4px 14px rgba(0,0,0,0.06)', border: '1px solid rgba(0,0,0,0.08)'}}>
+                <Link href="/demo" className="btn btn-outline inline-flex items-center gap-2" style={{background: '#FFF', borderRadius: '9999px', padding: '14px 26px', fontWeight: 600, fontSize: '14px', boxShadow: '0 4px 14px rgba(0,0,0,0.06)', border: '1px solid rgba(0,0,0,0.08)', color: 'var(--ink)'}}>
                   Try the Demo &nbsp;&rarr;
-                </button>
+                </Link>
               </div>
             </Reveal>
 
@@ -215,7 +225,7 @@ export default function LandingPage() {
                       <div className="ci-col">
                         <div className="ci-head">After<span>Day 21</span></div>
                         <div className="face-frame relative aspect-[3/4] rounded-[14px] overflow-hidden shadow-sm">
-                          <Image src="/day21_clean.jpg" alt="Day 21 After" fill style={{objectFit: 'cover'}} />
+                          <Image src="/day21_after.jpg" alt="Day 21 After" fill style={{objectFit: 'cover'}} />
                         </div>
                       </div>
                     </div>
@@ -263,7 +273,6 @@ export default function LandingPage() {
         </section>
 
         {/* WIDE PROOF REVIEW */}
-        {/* WIDE PROOF REVIEW */}
         <section style={{padding: '90px 0 120px'}}>
           <div className="wrap compare-section-grid items-center">
             <Reveal>
@@ -281,7 +290,7 @@ export default function LandingPage() {
               <div className="proof-card wide shadow-premium" style={{padding: '36px 40px', borderRadius: '20px'}}>
                 <div className="product-row" style={{alignItems: 'center', gap: '24px', marginBottom: '28px'}}>
                   <div className="product-img" style={{width: '84px', height: '110px', borderRadius: '10px', flexShrink: 0}}>
-                    <Image src="/serum.jpg" alt="Serum" fill style={{objectFit: 'cover'}} />
+                    <Image src="/serum_bottle_review.jpg" alt="Serum" fill style={{objectFit: 'cover'}} />
                   </div>
                   <div className="product-info" style={{flex: 1}}>
                     <h4 style={{fontSize: '17px', fontWeight: 700, color: 'var(--ink)', marginBottom: '4px'}}>Niacinamide 10% Serum</h4>

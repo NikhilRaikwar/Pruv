@@ -28,7 +28,7 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   metadataBase: new URL(
-    process.env.NEXT_PUBLIC_APP_URL || "https://pruv.vercel.app"
+    process.env.NEXT_PUBLIC_APP_URL || "https://pruv.nikhilraikwar.me"
   ),
   title: {
     default: "Pruv — Did your skincare actually work? | Measured Skincare Reviews",
@@ -51,7 +51,7 @@ export const metadata: Metadata = {
     "skincare efficacy",
     "dermatology AI",
   ],
-  authors: [{ name: "Nikhil Raikwar", url: "https://pruv.vercel.app" }],
+  authors: [{ name: "Nikhil Raikwar", url: "https://pruv.nikhilraikwar.me" }],
   creator: "Nikhil Raikwar",
   publisher: "Pruv",
   robots: {
@@ -68,7 +68,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://pruv.vercel.app",
+    url: "https://pruv.nikhilraikwar.me",
     siteName: "Pruv",
     title: "Pruv — Measured Skincare Reviews Powered by YouCam AI",
     description:
@@ -112,7 +112,7 @@ export default function RootLayout({
               "@context": "https://schema.org",
               "@type": "WebApplication",
               "name": "Pruv",
-              "url": "https://pruv.vercel.app",
+              "url": "https://pruv.nikhilraikwar.me",
               "description":
                 "Turn skincare trials into measured reviews backed by before/after YouCam AI Skin Analysis.",
               "applicationCategory": "HealthApplication, LifestyleApplication",

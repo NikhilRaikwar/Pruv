@@ -11,7 +11,7 @@ export async function GET() {
     const supabase = getSupabaseAdmin();
 
     const baselinePhoto = '/day1_real.jpg';
-    const followupPhoto = '/day21_real.jpg';
+    const followupPhoto = '/day21_after.jpg';
 
     // 1. Check if proof_reviews exists
     const { data: review } = await supabase

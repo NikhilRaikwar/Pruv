@@ -30,7 +30,7 @@ export function projectPublicReview(review: PublicProofReview) {
     createdAt: review.created_at,
     publishedAt: review.published_at,
     baselinePhoto: '/day1_real.jpg',
-    followupPhoto: '/day21_real.jpg',
+    followupPhoto: '/day21_after.jpg',
     trial: {
       title: review.participant_trial?.trial?.title ?? review.participant_trial?.trial?.product_name ?? 'Niacinamide 10% Serum',
       productName: review.participant_trial?.trial?.product_name ?? 'Niacinamide 10% Serum',

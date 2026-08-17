@@ -66,7 +66,7 @@ export default function ProofPage() {
               data.receipt.trial?.product_name ?? "Niacinamide 10% Serum",
             trialDays: data.receipt.trial?.trial_days ?? 21,
             baselinePhoto: data.receipt.baseline_photo || "/day1_real.jpg",
-            followupPhoto: data.receipt.followup_photo || "/day21_real.jpg",
+            followupPhoto: data.receipt.followup_photo || "/day21_after.jpg",
           });
           if (data.receipt.is_public && data.receipt.public_slug) {
             setPublicUrl(
@@ -84,7 +84,7 @@ export default function ProofPage() {
             productName: "Niacinamide 10% Serum",
             trialDays: 21,
             baselinePhoto: "/day1_real.jpg",
-            followupPhoto: "/day21_real.jpg",
+            followupPhoto: "/day21_after.jpg",
           });
         }
       } catch (err) {
@@ -98,7 +98,7 @@ export default function ProofPage() {
           productName: "Niacinamide 10% Serum",
           trialDays: 21,
           baselinePhoto: "/day1_real.jpg",
-          followupPhoto: "/day21_real.jpg",
+          followupPhoto: "/day21_after.jpg",
         });
       } finally {
         setLoading(false);
@@ -393,7 +393,7 @@ export default function ProofPage() {
                   <div className="relative w-20 h-24 sm:w-24 sm:h-28 rounded-xl overflow-hidden bg-[#F4F1EC] border-2 border-[#5B4FE8]/40 shadow-inner">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
-                      src={review?.followupPhoto || "/day21_real.jpg"}
+                      src={review?.followupPhoto || "/day21_after.jpg"}
                       alt="Day 21 scan"
                       className="w-full h-full object-cover"
                     />

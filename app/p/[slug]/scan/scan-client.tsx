@@ -78,7 +78,6 @@ export function ScanClient({ scanType }: { scanType: ScanType }) {
   // Camera start function
   const startCamera = useCallback(async () => {
     setError(null);
-    setPermissionDenied(false);
 
     try {
       if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
@@ -109,7 +108,7 @@ export function ScanClient({ scanType }: { scanType: ScanType }) {
     } catch (err) {
       console.warn("Camera access error:", err);
       setCameraActive(false);
-      setPermissionDenied(true);
+      setError("Camera access was denied or is unavailable. Please grant permission or choose 'Upload Raw Photo' below.");
     }
   }, [stream]);
 

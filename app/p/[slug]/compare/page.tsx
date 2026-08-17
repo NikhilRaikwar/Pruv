@@ -26,7 +26,7 @@ export default async function ComparePage() {
   const followupScan = scans?.find((s) => s.scan_type === 'followup');
 
   const baselinePhoto = '/day1_real.jpg';
-  const followupPhoto = '/day21_real.jpg';
+  const followupPhoto = '/day21_after.jpg';
 
   let rows = DEFAULT_METRIC_ROWS;
 

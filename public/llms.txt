@@ -4,7 +4,7 @@
 
 Pruv is not a generic skin scanner, AI dermatologist, or clinical diagnosis tool. It is a new review format for skincare products: a real human product trial backed by before-and-after skin measurements.
 
-- **Website**: https://pruv.vercel.app
+- **Website**: https://pruv.nikhilraikwar.me
 - **Repository**: https://github.com/NikhilRaikwar/Pruv
 - **API Engine**: Perfect Corp. YouCam AI Skin Analysis v2.1
 - **Database**: Supabase Postgres
