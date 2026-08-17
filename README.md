@@ -10,6 +10,12 @@ Capture a baseline, use the product normally, return for a follow-up, and combin
 
 [Live Demo](https://pruv.vercel.app) · [GitHub Repository](https://github.com/NikhilRaikwar/Pruv) · [MIT License](./LICENSE)
 
+<br/>
+
+<p align="center">
+  <img src="./public/pruv-banner.png" alt="Pruv Banner" width="100%" />
+</p>
+
 ---
 
 ## 💡 Why Pruv?

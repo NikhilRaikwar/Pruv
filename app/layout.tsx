@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono, Instrument_Serif } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -50,8 +51,8 @@ export const metadata: Metadata = {
     "skincare efficacy",
     "dermatology AI",
   ],
-  authors: [{ name: "Pruv Team", url: "https://pruv.vercel.app" }],
-  creator: "Pruv",
+  authors: [{ name: "Nikhil Raikwar", url: "https://pruv.vercel.app" }],
+  creator: "Nikhil Raikwar",
   publisher: "Pruv",
   robots: {
     index: true,
@@ -74,7 +75,7 @@ export const metadata: Metadata = {
       "A new review format for skincare products: real product trials backed by before/after YouCam AI Skin measurements. No fake reviews, just real measured proof.",
     images: [
       {
-        url: "/serum_bottle_review.jpg",
+        url: "/pruv-banner.png",
         width: 1200,
         height: 630,
         alt: "Pruv Measured Skincare Reviews",
@@ -86,7 +87,7 @@ export const metadata: Metadata = {
     title: "Pruv — Measured Skincare Reviews",
     description:
       "Real skincare trials backed by before/after Perfect Corp. YouCam Skin AI measurements.",
-    images: ["/serum_bottle_review.jpg"],
+    images: ["/pruv-banner.png"],
   },
   icons: {
     icon: "/icon.svg",
@@ -125,7 +126,10 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body>{children}</body>
+      <body>
+        {children}
+        <Analytics />
+      </body>
     </html>
   );
 }
