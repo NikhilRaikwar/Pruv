@@ -1,0 +1,40 @@
+{
+  "data": {
+    "task_id": "verified-youcam-hd-task-sample",
+    "task_status": "success",
+    "results": {
+      "output": [
+        {
+          "type": "hd_redness",
+          "raw_score": 79.8,
+          "ui_score": 79.8,
+          "mask_urls": []
+        },
+        {
+          "type": "hd_acne",
+          "raw_score": 86.2,
+          "ui_score": 86.2,
+          "mask_urls": []
+        },
+        {
+          "type": "hd_texture",
+          "raw_score": 79.8,
+          "ui_score": 79.8,
+          "mask_urls": []
+        },
+        {
+          "type": "hd_pore",
+          "raw_score": 83.1,
+          "ui_score": 83.1,
+          "mask_urls": []
+        },
+        {
+          "type": "hd_radiance",
+          "raw_score": 73.6,
+          "ui_score": 73.6,
+          "mask_urls": []
+        }
+      ]
+    }
+  }
+}
