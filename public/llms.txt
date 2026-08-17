@@ -1,90 +1,213 @@
-# Pruv — Measured Skincare Reviews
+# Pruv — Skincare Reviews You Can Measure
 
-> Turn your skincare product trials into measured reviews backed by before/after YouCam AI Skin Analysis.
+> Pruv turns a skincare product trial into a measured review using before-and-after Perfect Corp. YouCam Skin Analysis.
 
-Pruv is not a generic skin scanner, AI dermatologist, or clinical diagnosis tool. It is a new review format for skincare products: a real human product trial backed by before-and-after skin measurements.
+## Hackathon
 
-- **Website**: https://pruv.nikhilraikwar.me
-- **Repository**: https://github.com/NikhilRaikwar/Pruv
-- **API Engine**: Perfect Corp. YouCam AI Skin Analysis v2.1
-- **Database**: Supabase Postgres
-- **License**: MIT
+- **Hackathon:** YouCam API Skin AI & Apparel VTO Hackathon
+- **Track / Topic:** Skin AI
+- **Project status:** New hackathon project
+- **Live app:** https://pruv.nikhilraikwar.me
+- **Repository:** https://github.com/NikhilRaikwar/Pruv
+- **License:** MIT
 
----
+## One-sentence product definition
 
-## 🎯 Core Loop & Review Format
+Pruv uses YouCam Skin Analysis at baseline and follow-up, deterministically compares matching skin metrics, then combines the measured change with the user's rating and experience to create a Proof Review.
 
-Normal skincare reviews:
-```
-★★★★★
-"Worked great for me!"
-```
+## Problem
 
-Pruv Proof Review:
-```
-★★★★☆ (4.5 / 5)
-21-day trial
-Would buy again: Yes
+People often spend days or weeks testing a skincare product, but most product reviews contain only subjective opinion.
 
-Redness score      +8.6
-Radiance score     +5.3
-Texture score      +0.7
-Acne score         -2.5
-Pores score        -1.1
+Random before-and-after photos also vary in lighting, pose, camera processing, distance and framing.
 
-"Skin felt calmer and less red by the end of week two."
+Pruv adds a structured observational measurement layer to the product-review workflow.
 
-Measured with Perfect Corp. YouCam Skin AI v2.1
-```
+## Product flow
 
----
+1. User starts a skincare product trial.
+2. User gives explicit facial-processing consent.
+3. User captures a baseline scan.
+4. Pruv runs Perfect Corp. YouCam Skin Analysis v2.1.
+5. Structured baseline measurements are stored.
+6. The product trial remains associated with the anonymous browser session.
+7. The same participant returns for a follow-up.
+8. Pruv runs YouCam Skin Analysis again using the same measurement contract.
+9. Pruv calculates matching score deltas deterministically.
+10. User adds a rating, buy-again choice and optional short review.
+11. Pruv generates a private Proof Review.
+12. User may optionally publish a ProofLink.
 
-## 🛠️ Architecture & Tech Stack
+## YouCam integration
 
-- **Framework**: Next.js 15 (App Router, React Server Components, TypeScript)
-- **Styling**: Tailwind CSS & custom design tokens (Warm minimalist editorial palette `#FAF8F5`, `#18181B`, `#5B4FE8`)
-- **Skin AI**: Perfect Corp. YouCam AI Skin Analysis v2.1 (S2S Task & Polling API)
-  - `hd_redness`: Facial redness & erythema detection
-  - `hd_radiance`: Skin luminosity & radiance
-  - `hd_texture`: Skin surface smoothness & roughness
-  - `hd_acne`: Active acne, papules & pustules
-  - `hd_pore`: Enlarged pore visibility across facial regions
-- **Database**: Supabase (PostgreSQL with Row Level Security & Participant UUID Tokens)
-- **AI Synthesis**: OpenRouter DeepSeek V3 / GPT-4o-mini for observational review summaries
+Pruv uses **Perfect Corp. YouCam AI Skin Analysis v2.1** as the measurement layer.
 
----
+Primary shipped HD concerns:
 
-## 🛣️ Application Routes
+- `hd_redness`
+- `hd_radiance`
+- `hd_texture`
+- `hd_acne`
+- `hd_pore`
 
-- `/`: Landing page explaining the 3-step proof concept and demo links
-- `/start`: Instant participant onboarding (product name, brand, trial duration)
-- `/demo`: Dual-bento interactive sandbox (view complete Proof Review or test live scan)
-- `/p/[slug]/scan?type=baseline`: Day 1 live camera capture or raw photo upload
-- `/p/[slug]/baseline`: Day 1 baseline results card showing 5 measured metrics
-- `/p/[slug]/my-proof`: Live trial countdown dashboard & reminder settings
-- `/p/[slug]/scan?type=followup`: Day 21 follow-up scan in identical lighting
-- `/p/[slug]/compare`: Side-by-side photo comparison & metric delta table
-- `/p/[slug]/review`: 3-step user experience form (stars, would-buy-again, quote)
-- `/p/[slug]/proof`: Verified Proof Review receipt with public ProofLink generator
-- `/proof/[slug]`: Public, shareable Proof Review receipt page
+Production workflow:
 
----
+1. initialize a Skin Analysis file;
+2. receive a YouCam file ID and pre-signed upload request;
+3. upload the capture;
+4. create an asynchronous Skin Analysis task;
+5. persist the task ID;
+6. poll the same task until success or error;
+7. normalize and save the structured results.
 
-## 🔌 API Endpoints
+Pruv does not treat YouCam as a one-time scanner. The baseline establishes a measurement configuration that the follow-up reuses.
 
-- `POST /api/trials/start`: Create a new participant trial session
-- `POST /api/proofs/join`: Join an existing trial by slug
-- `POST /api/youcam/upload-slot`: Request presigned S3 upload URL from YouCam API
-- `POST /api/scans/start`: Initialize a YouCam Skin Analysis v2.1 task
-- `GET /api/scans/[scanId]/status`: Poll YouCam task completion & save normalized scores
-- `POST /api/reviews`: Save participant qualitative experience & ratings
-- `POST /api/reviews/publish`: Generate shareable public slug for the Proof Review
-- `GET /api/proof-receipts`: Fetch structured receipt data
+## What Pruv adds beyond the YouCam API call
 
----
+YouCam supplies the skin-measurement primitive.
 
-## 📖 Key Principles
+Pruv supplies:
 
-1. **Observational, Not Diagnostic**: Pruv clearly states that results are observational measurements of skin surface appearance, not clinical medical diagnoses.
-2. **Deterministic Deltas**: Changes between Day 1 and Day 21 are calculated as direct mathematical deltas (`Followup Score - Baseline Score`).
-3. **Evidence-Based Reviews**: Every Proof Review is strictly tied to real YouCam API vision analysis on actual captured photos.
+- anonymous trial sessions;
+- explicit consent;
+- longitudinal state;
+- baseline/follow-up scan orchestration;
+- persistent asynchronous task state;
+- matching measurement contracts;
+- deterministic score comparison;
+- product rating and experience;
+- private Proof Review generation;
+- optional public ProofLink sharing.
+
+A single Skin Analysis response is not the final product.
+
+## Deterministic comparison
+
+The canonical numerical changes are calculated in application code from matching baseline and follow-up measurements.
+
+Conceptually:
+
+`delta = followupScore - baselineScore`
+
+An LLM is not the source of truth for metric values or score differences.
+
+## Optional language-model layer
+
+Pruv may use OpenRouter for optional structured explanation of already-computed results.
+
+The language-model layer:
+
+- does not analyze raw face images;
+- does not calculate canonical metric deltas;
+- does not diagnose medical conditions;
+- is not required for the Proof Review to work.
+
+## Demo behavior
+
+`/demo` is designed for hackathon judges.
+
+It supports two separate concepts:
+
+1. **Complete Proof Review demo** — a same-participant baseline and follow-up captured earlier, allowing the entire longitudinal product experience to be inspected immediately.
+2. **Live Skin Scan** — where enabled, a judge can run a real YouCam Skin Analysis.
+
+A random live judge scan is not compared against another participant's seeded baseline.
+
+## Key routes
+
+- `/` — landing page
+- `/how` — concise product explanation
+- `/demo` — judge demo
+- `/start` — start a Proof Review
+- `/p/[slug]/consent` — explicit consent
+- `/p/[slug]/scan?type=baseline` — baseline scan
+- `/p/[slug]/baseline` — baseline result
+- `/p/[slug]/my-proof` — trial state
+- `/p/[slug]/scan?type=followup` — follow-up scan
+- `/p/[slug]/compare` — deterministic comparison
+- `/p/[slug]/review` — user experience input
+- `/p/[slug]/proof` — private Proof Review
+- `/proof/[slug]` — public ProofLink
+- `/privacy` — Privacy & Data Handling
+- `/terms` — Terms of Use
+
+## Primary API endpoints
+
+- `POST /api/trials/start`
+- `POST /api/proofs/join`
+- `POST /api/youcam/upload-slot`
+- `POST /api/scans/start`
+- `GET /api/scans/[scanId]/status`
+- `POST /api/reviews`
+- `POST /api/reviews/publish`
+- `GET /api/proof-receipts`
+
+## Technology
+
+- Next.js 15
+- React 19
+- TypeScript
+- Tailwind CSS
+- Perfect Corp. YouCam Skin Analysis v2.1
+- Supabase PostgreSQL
+- Vercel
+- optional OpenRouter explanation layer
+
+## Privacy model
+
+- no login or email is required for the core trial flow;
+- anonymous browser access uses a random session token;
+- server-side persistence uses structured trial/measurement data;
+- Proof Reviews are private by default;
+- publishing a ProofLink is an explicit user action;
+- raw face captures should not be persistently stored in Pruv's database.
+
+## Medical / causality boundary
+
+Pruv is observational, not diagnostic.
+
+Pruv does not claim:
+
+- that a skincare product caused a measured change;
+- clinical efficacy;
+- diagnosis of acne, rosacea or another condition;
+- medical treatment advice.
+
+A Proof Review represents one participant's product experience plus observational before/after skin measurements.
+
+## Consumer value
+
+Pruv targets a real consumer decision:
+
+**“I used this skincare product for weeks. What visibly changed, and how did I feel about the product?”**
+
+The long-term product thesis is that skincare retailers could complement star ratings with structured Proof Reviews from real product trials.
+
+## Hackathon judging alignment
+
+### Technological Implementation
+Real YouCam Skin Analysis is integrated into a longitudinal baseline/follow-up workflow with asynchronous task handling, state persistence and deterministic comparison.
+
+### Design
+Pruv is a complete no-login product flow ending in a clear Proof Review artifact.
+
+### Potential Impact
+Pruv improves the usefulness of skincare product reviews for people deciding whether a product is worth trying or continuing.
+
+### Quality of the Idea
+Instead of ending at skin analysis, Pruv uses Skin AI as infrastructure for a new measured review format.
+
+## Local verification
+
+Useful commands:
+
+- `npm run build`
+- `npm run lint`
+- `npm test`
+- `npm run verify:youcam`
+- `npm run verify:openrouter`
+
+## Repository
+
+Source of truth:
+https://github.com/NikhilRaikwar/Pruv

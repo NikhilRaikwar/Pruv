@@ -1,22 +1,22 @@
 # Pruv Architecture & System Design
 
-> Complete technical architecture, sequence diagrams, and state management for Pruv.
+## Overview
+
+Pruv turns a skincare product trial into a measured review using two Perfect Corp. YouCam Skin Analysis observations and a deterministic comparison layer.
+
+<p align="center">
+  <img src="../public/pruv-architecture.png" alt="Pruv System Architecture Diagram" width="100%" />
+</p>
 
 ---
 
-## 1. System Overview
-
-Pruv is an end-to-end longitudinal skincare trial and review platform powered by Perfect Corp. YouCam AI Skin Analysis v2.1.
-
-<p align="center">
-  <img src="../public/pruv-architecture.png" alt="Pruv Real Product Architecture Diagram" width="100%" />
-</p>
+## System Architecture
 
 ```mermaid
 flowchart LR
     B[Browser Camera / Upload]
     S[Pruv Next.js Server]
-    Y[YouCam Skin Analysis]
+    Y[YouCam Skin Analysis v2.1]
     D[(Supabase Postgres)]
     C[Comparison Engine]
     P[Proof Review]
@@ -28,7 +28,7 @@ flowchart LR
     B -->|4. Upload image to S3| Y
     B -->|5. file_id| S
     S -->|6. Create analysis task| Y
-    Y -->|7. task_id| S
+    Y -->|7. task_id / scores| S
     S -->|8. Structured scores only| D
     D --> C
     C --> P
@@ -36,41 +36,7 @@ flowchart LR
 
 ---
 
-## 2. Real YouCam Request Sequence
-
-```mermaid
-sequenceDiagram
-    participant U as User Browser
-    participant P as Pruv Server
-    participant Y as YouCam API
-    participant D as Supabase Postgres
-
-    U->>P: POST /api/youcam/upload-slot
-    P->>Y: Request presigned S3 upload slot
-    Y-->>P: file_id + upload_url
-    P-->>U: file_id + upload_url
-
-    U->>Y: PUT raw photo to S3
-    U->>P: POST /api/scans/start (file_id, scanType)
-
-    P->>Y: POST /v2.1/task (actions: hd_redness, hd_acne, hd_texture, hd_pore, hd_radiance)
-    Y-->>P: task_id
-    P->>D: Save scan record (task_id, status=processing)
-    P-->>U: scanId + taskId
-
-    loop Poll until complete
-        U->>P: GET /api/scans/[scanId]/status
-        P->>Y: GET /v2.1/task/[taskId]
-        Y-->>P: status (200 success / processing / error)
-    end
-
-    P->>D: Save normalized scan_metrics
-    P-->>U: Scan complete + metrics payload
-```
-
----
-
-## 3. Trial State Machine
+## Product State Machine
 
 ```mermaid
 stateDiagram-v2
@@ -97,7 +63,7 @@ stateDiagram-v2
 
 ---
 
-## 4. Data Model (Entity-Relationship)
+## Data Model (Entity-Relationship)
 
 ```mermaid
 erDiagram
@@ -155,10 +121,51 @@ erDiagram
 
 ---
 
-## 5. Measurement Consistency Contract
+## Measurement Contract
 
-A longitudinal before/after comparison is valid only when both scans adhere to the exact same analysis family and configuration:
-- **Engine Family**: Perfect Corp. YouCam Skin Analysis v2.1 HD
-- **Action Set**: `hd_redness`, `hd_acne`, `hd_texture`, `hd_pore`, `hd_radiance`
-- **Normalization Strategy**: 0–100 skin health scale (100 = optimal/clear skin)
-- **Deterministic Delta Math**: `Followup Score - Baseline Score` (Positive = Improvement)
+A before/after review is scientifically credible only when both observations adhere to an immutable measurement contract:
+
+1. **YouCam Skin Analysis v2.1**: The baseline scan establishes the exact metric family (`hd_redness`, `hd_radiance`, `hd_texture`, `hd_acne`, `hd_pore`).
+2. **Matching Follow-up Configuration**: The follow-up scan reuses the identical action set and normalized 0–100 scale.
+3. **Deterministic Comparison Engine**: All numerical deltas are calculated in application code using canonical arithmetic:
+   $$\Delta = \text{Followup Score} - \text{Baseline Score}$$
+4. **No LLM Calculation**: Large language models do not compute or hallucinate metric values or differences.
+
+---
+
+## Data Flow
+
+```text
+Browser Capture
+  → Pruv Server (Presigned Upload Slot Request)
+  → Perfect Corp. YouCam API (File Slot Initialized)
+  → Direct S3 Binary Upload (from Browser)
+  → Pruv Server (Task Triggered)
+  → YouCam Async Polling (until Status 200)
+  → Structured Metric Normalization
+  → Supabase PostgreSQL (Structured Scores Persisted)
+  → Deterministic Comparison Engine (Delta Calculation)
+  → User Rating & Qualitative Input
+  → Private Proof Review / Optional Public ProofLink
+```
+
+---
+
+## Persistence Architecture
+
+Pruv separates persistent structured trial records from transient binary data:
+
+- **Anonymous Participant**: Cryptographically random session tokens (`pruv_participant_<slug>`) whose SHA-256 hash is verified server-side without requiring passwords or emails.
+- **Trial**: Product metadata, target duration, and baseline configuration.
+- **Scans & Scan Metrics**: Stores task status, timestamps, and normalized 0–100 numerical scores for redness, radiance, texture, acne, and pores.
+- **Proof Reviews**: Stores user star rating (1–5), buy-again preference, personal notes, metric summary snapshot, and optional public ProofLink slug.
+
+---
+
+## Privacy Boundaries
+
+- **Explicit Consent**: Users affirmatively consent to facial processing before camera initialization or file upload.
+- **Transient Face Uploads**: Raw images are transmitted directly to YouCam's secure S3 endpoint. Pruv does not persist raw selfie blobs in its database.
+- **Structured Data Only**: Only normalized numerical scores and metadata are stored in Supabase.
+- **Private by Default**: Proof Reviews remain accessible only to the trial participant until they explicitly choose to publish a shareable ProofLink.
+- **Observational Boundary**: Pruv provides observational skin metrics, not medical diagnoses, dermatological prescriptions, or clinical proof of causality.
