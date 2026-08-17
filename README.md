@@ -1,20 +1,32 @@
-# ✦ Pruv
-
-### Skincare reviews you can measure.
-
-> Turn a skincare product trial into a measured review backed by before-and-after YouCam AI Skin Analysis.
-
-Capture a baseline, use the product normally, return for a follow-up, and combine observed YouCam Skin AI changes with your own rating and experience.
-
-**The result is a Proof Review: opinion + measured change in one verified artifact.**
-
-[Live Demo](https://pruv.vercel.app) · [GitHub Repository](https://github.com/NikhilRaikwar/Pruv) · [MIT License](./LICENSE)
-
-<br/>
-
 <p align="center">
   <img src="./public/pruv-banner.png" alt="Pruv Banner" width="100%" />
 </p>
+
+<h1 align="center">✦ Pruv</h1>
+
+<p align="center">
+  <strong>Skincare reviews you can measure.</strong><br/>
+  Turn a skincare product trial into a measured review backed by before-and-after YouCam AI Skin Analysis.
+</p>
+
+<p align="center">
+  <a href="https://pruv.vercel.app"><strong>Live Demo</strong></a> ·
+  <a href="https://github.com/NikhilRaikwar/Pruv"><strong>GitHub Repository</strong></a> ·
+  <a href="./LICENSE"><strong>MIT License</strong></a>
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Next.js-15-black?style=flat&logo=next.js" alt="Next.js" />
+  <img src="https://img.shields.io/badge/TypeScript-5.0-blue?style=flat&logo=typescript" alt="TypeScript" />
+  <img src="https://img.shields.io/badge/Perfect%20Corp-YouCam%20Skin%20AI%20v2.1-5B4FE8?style=flat" alt="YouCam AI" />
+  <img src="https://img.shields.io/badge/Supabase-PostgreSQL-3ECF8E?style=flat&logo=supabase" alt="Supabase" />
+  <img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License" />
+</p>
+
+<br/>
+
+> **The result is a Proof Review: opinion + measured change in one verified artifact.**
+> Capture a baseline, use the product normally, return for a follow-up, and combine observed YouCam Skin AI changes with your own rating and experience.
 
 ---
 
