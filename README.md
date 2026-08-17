@@ -11,8 +11,8 @@
 
 <p align="center">
   <a href="https://pruv.nikhilraikwar.me"><strong>Live Demo</strong></a> ·
+  <a href="https://youtu.be/cVbZrMZh8-4"><strong>Demo Video</strong></a> ·
   <a href="https://pruv.nikhilraikwar.me/demo"><strong>Interactive Judge Demo</strong></a> ·
-  <a href="https://pruv.nikhilraikwar.me/film.html"><strong>48s Product Film</strong></a> ·
   <a href="https://github.com/NikhilRaikwar/Pruv"><strong>GitHub Repository</strong></a> ·
   <a href="./LICENSE"><strong>MIT License</strong></a>
 </p>
@@ -29,6 +29,14 @@
 
 > **The result is a Proof Review: personal experience + measured skin change in one verified artifact.**
 > Capture a baseline, use the product normally, return for a follow-up scan, and combine observed YouCam Skin AI measurements with your rating and review.
+
+---
+
+## 📺 Product Demo Video
+
+[![Pruv Demo Video](https://img.youtube.com/vi/cVbZrMZh8-4/maxresdefault.jpg)](https://youtu.be/cVbZrMZh8-4)
+
+> 📹 **Watch on YouTube**: [https://youtu.be/cVbZrMZh8-4](https://youtu.be/cVbZrMZh8-4)
 
 ---
 
