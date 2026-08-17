@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./public/pruv-banner.png" alt="Pruv Banner" width="100%" />
+  <img src="https://raw.githubusercontent.com/NikhilRaikwar/Pruv/main/public/pruv-banner.png" alt="Pruv Banner" width="100%" />
 </p>
 
 <h1 align="center">✦ Pruv</h1>
@@ -89,7 +89,7 @@ Pruv does not use Skin AI as a one-off scanner. YouCam provides the **measuremen
 ## 🏗️ System Architecture
 
 <p align="center">
-  <img src="./public/pruv-architecture.png" alt="Pruv System Architecture Diagram" width="100%" />
+  <img src="https://raw.githubusercontent.com/NikhilRaikwar/Pruv/main/public/pruv-architecture.png" alt="Pruv System Architecture Diagram" width="100%" />
 </p>
 
 ---

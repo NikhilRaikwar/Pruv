@@ -5,7 +5,7 @@
 Pruv turns a skincare product trial into a measured review using two Perfect Corp. YouCam Skin Analysis observations and a deterministic comparison layer.
 
 <p align="center">
-  <img src="../public/pruv-architecture.png" alt="Pruv System Architecture Diagram" width="100%" />
+  <img src="https://raw.githubusercontent.com/NikhilRaikwar/Pruv/main/public/pruv-architecture.png" alt="Pruv System Architecture Diagram" width="100%" />
 </p>
 
 ---
