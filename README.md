@@ -47,6 +47,8 @@ People spend weeks testing skincare products, but traditional online reviews rel
 - **Texture score**: `+0.7`
 - **Measured with Perfect Corp. YouCam Skin AI v2.1**
 
+> 💡 **Product-Agnostic Architecture**: For this hackathon demo, Pruv showcases a seeded *Niacinamide 10% Serum (21-Day Trial)* fixture so judges can test the full end-to-end flow immediately. The underlying architecture is completely product-agnostic and designed to support any skincare product (serums, moisturizers, acne treatments, retinols, and sunscreens).
+
 ---
 
 ## 🚀 How It Works

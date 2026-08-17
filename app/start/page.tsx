@@ -109,18 +109,17 @@ export default function StartTrialPage() {
                   Niacinamide 10% Serum
                 </h2>
                 
-                {/* 21-Day Badge */}
+                {/* Demo Product & 21-Day Badge */}
                 <div className="inline-flex items-center gap-2 px-3 py-1.5 mt-2.5 rounded-lg bg-[#F4F1FC] text-[#5B4FE8] text-xs font-semibold">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-                    <line x1="16" y1="2" x2="16" y2="6"></line>
-                    <line x1="8" y1="2" x2="8" y2="6"></line>
-                    <line x1="3" y1="10" x2="21" y2="10"></line>
-                  </svg>
-                  21-Day Proof Trial
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#5B4FE8]" />
+                  Demo product &middot; 21-day trial
                 </div>
 
-                <div className="mt-6 mb-3">
+                <p className="text-xs text-[#71717A] mt-3 leading-relaxed">
+                  For this hackathon demo, Pruv starts with one sample skincare product so you can experience the full flow instantly.
+                </p>
+
+                <div className="mt-5 mb-2.5">
                   <span className="text-xs font-semibold text-[#71717A]">
                     Target concerns
                   </span>
@@ -147,8 +146,25 @@ export default function StartTrialPage() {
           </div>
         </Reveal>
 
+        {/* Product-Agnostic Engine Note */}
+        <Reveal delay={0.08}>
+          <div className="bg-[#FAF8FF] border border-[#E9E4FC] rounded-2xl p-4 sm:p-5 mt-6 mb-6 flex items-start gap-3.5 text-left shadow-xs">
+            <div className="w-8 h-8 rounded-xl bg-white text-[#5B4FE8] shadow-xs flex items-center justify-center flex-shrink-0 mt-0.5 font-bold">
+              ✦
+            </div>
+            <div>
+              <h3 className="text-sm font-bold text-[#18181B]">
+                Pruv is product-agnostic.
+              </h3>
+              <p className="text-xs text-[#52525B] mt-1 leading-relaxed">
+                The same baseline &rarr; follow-up &rarr; Proof Review workflow can be used for serums, moisturizers, acne treatments, sunscreens, and other skincare products.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+
         {/* CTA Button Section */}
-        <Reveal delay={0.1} className="mt-8 mb-10 text-center flex flex-col items-center">
+        <Reveal delay={0.1} className="mt-4 mb-10 text-center flex flex-col items-center">
           <p className="text-xs font-medium text-[#71717A] mb-3">
             No account required.
           </p>
@@ -157,10 +173,15 @@ export default function StartTrialPage() {
             href="/p/niacinamide21/start"
             className="w-full max-w-[280px] sm:max-w-[300px] py-3.5 px-6 rounded-xl bg-[#5B4FE8] hover:bg-[#4E42DC] active:scale-[0.98] text-white font-bold text-base shadow-[0_6px_20px_rgba(91,79,232,0.32)] transition-all flex items-center justify-center text-center"
           >
-            Start This Trial
+            Start Demo Trial
           </Link>
 
-          <div className="text-xs text-[#71717A] mt-3.5 flex items-center justify-center gap-1.5 font-normal">
+          <div className="mt-3.5 text-xs text-[#71717A] font-medium flex items-center justify-center gap-1.5">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#A1A1AA]" />
+            Use my own product &mdash; Coming next
+          </div>
+
+          <div className="text-xs text-[#71717A] mt-2 flex items-center justify-center gap-1.5 font-normal">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-[#71717A]">
               <circle cx="12" cy="12" r="10"></circle>
               <polyline points="12 6 12 12 16 14"></polyline>
