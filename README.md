@@ -12,6 +12,7 @@
 <p align="center">
   <a href="https://pruv.nikhilraikwar.me"><strong>Live Demo</strong></a> ·
   <a href="https://pruv.nikhilraikwar.me/demo"><strong>Interactive Judge Demo</strong></a> ·
+  <a href="https://pruv.nikhilraikwar.me/film.html"><strong>48s Product Film</strong></a> ·
   <a href="https://github.com/NikhilRaikwar/Pruv"><strong>GitHub Repository</strong></a> ·
   <a href="./LICENSE"><strong>MIT License</strong></a>
 </p>

@@ -1,0 +1,558 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pruv — 45 Second Interactive Product Film</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;overflow:hidden}
+body{font-family:'DM Sans',sans-serif;background:#eceae5;color:#18181B;display:grid;place-items:center;padding:20px}
+.app{width:min(1400px,100%);display:grid;gap:14px}
+.wrap{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;border:1px solid #dcd8d0;border-radius:22px;background:#FAF8F5;box-shadow:0 32px 90px rgba(24,24,27,.14)}
+.stage{position:absolute;width:1920px;height:1080px;transform-origin:0 0;background:#FAF8F5;overflow:hidden}
+.scene{position:absolute;inset:0;opacity:0;pointer-events:none;display:grid;place-items:center;overflow:hidden;background:radial-gradient(circle at 50% 35%,#ffffff 0%,#FAF8F5 60%,#f3efe8 100%)}
+.scene.active{opacity:1;pointer-events:auto;z-index:2}
+.grid{position:absolute;inset:0;background-image:linear-gradient(rgba(91,79,232,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(91,79,232,.035) 1px,transparent 1px);background-size:60px 60px;mask-image:radial-gradient(circle at 50% 45%,#000 20%,transparent 75%)}
+
+/* Brand Header */
+.brand{position:absolute;top:48px;left:58px;display:flex;align-items:center;gap:12px;font:800 28px 'Manrope';letter-spacing:-1px;color:#18181B;z-index:10}
+.brand-icon{width:38px;height:38px;border-radius:11px;background:linear-gradient(135deg,#5B4FE8,#8277FA);display:grid;place-items:center;color:#fff;font-size:20px;box-shadow:0 6px 16px rgba(91,79,232,.35)}
+.network{position:absolute;top:46px;right:58px;display:flex;gap:12px;z-index:10}
+.pill{display:flex;align-items:center;gap:9px;padding:10px 18px;border:1px solid #E5E0D8;border-radius:999px;background:rgba(255,255,255,.9);font:700 14px 'Manrope';color:#5B4FE8;box-shadow:0 2px 8px rgba(0,0,0,.03)}
+.pill.youcam{background:#F4F0FF;border-color:#E3DBFA}
+
+.inner{position:relative;width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:90px 100px 145px;z-index:5}
+.eyebrow{font:800 15px 'Manrope';letter-spacing:.18em;color:#5B4FE8;text-transform:uppercase;margin-bottom:16px;background:#F4F0FF;border:1px solid #E3DBFA;padding:6px 16px;border-radius:999px}
+.title{font:800 clamp(54px,5vw,88px) 'Manrope';letter-spacing:-3.5px;line-height:1.02;text-align:center;margin:0;color:#18181B}
+.sub{font-size:28px;line-height:1.45;color:#52525B;text-align:center;max-width:1120px;margin:22px auto 0}
+.serif-sub{font-family:'Instrument Serif',serif;font-style:italic;font-size:36px;color:#71717A;text-align:center;margin-top:16px}
+
+/* Bottom Caption Bar */
+.caption{position:absolute;left:0;right:0;bottom:0;z-index:8;padding:50px 70px 38px;background:linear-gradient(transparent,rgba(250,248,245,.98) 45%);font:700 28px 'Manrope';text-align:center;letter-spacing:-.4px;color:#18181B}
+
+/* Motion system */
+.scene.active .rise{animation:rise .85s cubic-bezier(.16,1,.3,1) both}
+.scene.active .delay1{animation-delay:.18s}
+.scene.active .delay2{animation-delay:.36s}
+.scene.active .delay3{animation-delay:.54s}
+@keyframes rise{from{opacity:0;transform:translateY(30px) scale(.98)}to{opacity:1;transform:none}}
+@keyframes pulse{50%{transform:scale(1.05);box-shadow:0 0 0 16px rgba(91,79,232,.1)}}
+
+/* Scene 0: Hero */
+.hero-logo{font:800 160px 'Manrope';letter-spacing:-10px;line-height:.9;display:flex;align-items:center;gap:28px}
+.hero-logo .hero-mark{width:140px;height:140px;border-radius:40px;background:linear-gradient(135deg,#5B4FE8,#8B80FA);display:grid;place-items:center;color:#fff;font-size:80px;box-shadow:0 24px 60px rgba(91,79,232,.42)}
+.hero-rule{width:110px;height:6px;border-radius:9px;background:#5B4FE8;margin:28px auto}
+.badges-row{display:flex;align-items:center;gap:20px;margin-top:40px}
+.partner-chip{display:flex;align-items:center;gap:12px;padding:14px 24px;border:1px solid #E2DDF5;border-radius:18px;background:#fff;box-shadow:0 10px 30px rgba(91,79,232,.08);font:700 18px 'Manrope';color:#18181B}
+.partner-chip b{color:#5B4FE8}
+
+/* Scene 1: The Problem */
+.problem-grid{display:grid;grid-template-columns:520px 100px 520px;align-items:center;gap:24px;margin-top:45px}
+.problem-card{height:290px;padding:36px;border:1px solid #E5E0D8;border-radius:28px;background:#fff;box-shadow:0 16px 45px rgba(24,24,27,.05);display:flex;flex-direction:column;justify-content:space-between}
+.problem-card.bad{border-color:#FCD34D;background:#FFFDF7}
+.problem-card.good{border-color:#C4B7FA;background:#F8F6FF}
+.card-tag{font:800 13px 'Manrope';letter-spacing:.14em;text-transform:uppercase;color:#71717A}
+.card-quote{font-size:24px;line-height:1.35;font-weight:700;color:#18181B;margin:12px 0}
+.vs-divider{font:800 24px 'Manrope';color:#A1A1AA;text-align:center}
+.risk-chips{display:flex;gap:14px;margin-top:34px}
+.risk{padding:12px 20px;border:1px solid #E5E0D8;background:#fff;color:#71717A;border-radius:999px;font:700 15px 'Manrope'}
+.risk.red{border-color:#FECDD3;background:#FFF1F2;color:#E11D48}
+
+/* Scene 2 & 3: Camera HUD & Workflow */
+.hud-board{position:relative;width:1300px;height:440px;margin-top:30px;border:1px solid #E5E0D8;border-radius:32px;background:#fff;box-shadow:0 24px 65px rgba(24,24,27,.06);display:grid;grid-template-columns:400px 1fr;gap:40px;padding:36px;align-items:center}
+.viewfinder{position:relative;width:340px;height:360px;border:2.5px dashed #C4B7FA;border-radius:28px;background:#F8F6FF;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden}
+.face-oval{width:180px;height:240px;border:3px solid #5B4FE8;border-radius:50%/60%;position:relative;display:grid;place-items:center}
+.laser{position:absolute;inset:0;height:3px;background:linear-gradient(90deg,transparent,#818CF8,transparent);top:50%;opacity:.8}
+.scene.active .laser{animation:scan 2s ease-in-out infinite}
+@keyframes scan{0%,100%{top:20%}50%{top:80%}}
+.hud-metrics{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.metric-box{padding:20px;border:1px solid #EBE7E0;border-radius:20px;background:#FAF8F5}
+.metric-box .m-label{font:700 14px 'Manrope';color:#71717A;display:flex;justify-content:space-between}
+.metric-box .m-val{font:800 32px 'Manrope';color:#18181B;margin-top:8px}
+
+/* Scene 4: Comparison & Proof Receipt */
+.proof-stage{display:grid;grid-template-columns:460px 80px 580px;align-items:center;gap:20px;margin-top:35px}
+.receipt{border:1px solid #E2DDF5;border-radius:28px;background:#fff;padding:32px;box-shadow:0 20px 50px rgba(91,79,232,.1)}
+.receipt-head{display:flex;align-items:center;gap:18px;padding-bottom:20px;border-bottom:1px solid #F0EDF6}
+.receipt-head .p-img{width:64px;height:72px;border-radius:14px;background:#FAF8F5;border:1px solid #ECE7DE;display:grid;place-items:center;font-size:32px}
+.score-row{display:flex;align-items:center;justify-content:space-between;padding:12px 0;font:700 18px 'Manrope';border-bottom:1px solid #F6F4FA}
+.score-row .delta{font-weight:800;color:#10B981;font-size:20px}
+.delta.orange{color:#EA580C}
+.delta.blue{color:#0284C7}
+
+/* Scene 5: Final Call to Action */
+.final-proofs{display:flex;gap:18px;margin:36px 0}
+.proofchip{display:flex;align-items:center;gap:10px;padding:16px 24px;background:#fff;border:1px solid #E5E0D8;border-radius:999px;font:800 17px 'Manrope';color:#18181B;box-shadow:0 6px 20px rgba(0,0,0,.03)}
+.proofchip:before{content:'✓';color:#10B981;font-weight:900}
+.cta-box{padding:20px 48px;border-radius:20px;background:#5B4FE8;color:#fff;font:800 28px 'Manrope';box-shadow:0 16px 45px rgba(91,79,232,.35);letter-spacing:-.5px}
+.links{display:flex;gap:30px;margin-top:24px;font:600 18px 'Manrope';color:#71717A}
+
+/* Controls Bar */
+.controls{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid #d8dbe1;border-radius:16px;padding:12px 18px}
+.btn{border:0;background:#f1f2f4;border-radius:10px;padding:11px 16px;font:800 13px 'Manrope';color:#18181B;cursor:pointer;transition:all .15s}
+.btn:hover{background:#e5e7eb}
+.btn.primary{background:#5B4FE8;color:#fff}
+.btn.primary:hover{background:#4E42DC}
+.timeline{flex:1;height:8px;border-radius:10px;background:#e7e8eb;overflow:hidden;cursor:pointer}
+.progress{height:100%;width:0;background:#5B4FE8;transition:width .1s linear}
+.time{font:700 13px 'Manrope';min-width:92px;text-align:center;color:#52525B}
+.dots{display:flex;gap:7px}
+.dot{width:8px;height:8px;border-radius:50%;background:#cfd2d8;transition:all .2s}
+.dot.on{background:#5B4FE8;transform:scale(1.4)}
+.wrap:fullscreen{width:100vw;height:100vh;border:0;border-radius:0}
+.wrap:fullscreen .stage{left:50%;top:50%;transform-origin:center}
+</style>
+</head>
+<body>
+
+<div class="app">
+  <div class="wrap" id="wrap">
+    <main class="stage" id="stage">
+
+      <!-- SCENE 0: INTRO -->
+      <section class="scene active" data-i="0">
+        <div class="grid"></div>
+        <div class="inner">
+          <div class="hero-logo rise">
+            <div class="hero-mark">✦</div>
+            <span>Pruv</span>
+          </div>
+          <div class="hero-rule rise delay1"></div>
+          <h1 class="title rise delay1" style="font-size:68px;margin-top:10px">Skincare reviews you can measure.</h1>
+          <p class="serif-sub rise delay2">Turn a skincare trial into a measured review backed by YouCam AI.</p>
+          <div class="badges-row rise delay3">
+            <div class="partner-chip">Powered by <b>Perfect Corp. YouCam AI v2.1</b></div>
+            <div class="partner-chip"><b>Deterministic Comparison</b></div>
+            <div class="partner-chip"><b>No Fake Reviews</b></div>
+          </div>
+        </div>
+        <div class="caption">Pruv turns a skincare product trial into a measured Proof Review.</div>
+      </section>
+
+      <!-- SCENE 1: THE PROBLEM -->
+      <section class="scene" data-i="1">
+        <div class="brand">
+          <div class="brand-icon">✦</div>
+          <span>Pruv</span>
+        </div>
+        <div class="network">
+          <span class="pill">The Problem</span>
+        </div>
+        <div class="inner">
+          <div class="eyebrow rise">Subjective Reviews vs Reality</div>
+          <h2 class="title rise delay1">Did your skincare actually work?</h2>
+          <div class="problem-grid rise delay2">
+            <div class="problem-card bad">
+              <div class="card-tag">Traditional Online Review</div>
+              <div class="card-quote">“★★★★★ — Loved it, worked great for me!”</div>
+              <div style="font-size:15px;color:#B45309;font-weight:700">Zero proof · Unknown starting point · Subjective</div>
+            </div>
+            <div class="vs-divider">VS</div>
+            <div class="problem-card good">
+              <div class="card-tag">Pruv Measured Proof Review</div>
+              <div class="card-quote">21-Day Trial · Redness +8.6 · Radiance +3.3</div>
+              <div style="font-size:15px;color:#5B4FE8;font-weight:700">YouCam Skin AI · Deterministic Deltas · Verified</div>
+            </div>
+          </div>
+          <div class="risk-chips rise delay3">
+            <span class="risk red">Unverified claims?</span>
+            <span class="risk red">Lighting trickery?</span>
+            <span class="risk red">Fake sponsored reviews?</span>
+          </div>
+        </div>
+        <div class="caption">Most skincare reviews are purely subjective opinions with zero verifiable baseline.</div>
+      </section>
+
+      <!-- SCENE 2: BASELINE SCAN -->
+      <section class="scene" data-i="2">
+        <div class="brand">
+          <div class="brand-icon">✦</div>
+          <span>Pruv</span>
+        </div>
+        <div class="network">
+          <span class="pill youcam">Step 01 · Baseline Scan</span>
+        </div>
+        <div class="inner">
+          <div class="eyebrow rise">01 · Capture Day 1</div>
+          <h2 class="title rise delay1">Lock the measurement contract.</h2>
+          <div class="hud-board rise delay2">
+            <div class="viewfinder">
+              <div class="face-oval">
+                <div class="laser"></div>
+                <div style="width:8px;height:8px;border-radius:50%;background:#5B4FE8"></div>
+              </div>
+              <div style="font:800 13px 'Manrope';color:#5B4FE8;margin-top:14px">● YOUCAM SKIN AI SCANNING</div>
+            </div>
+            <div class="hud-metrics">
+              <div class="metric-box">
+                <div class="m-label"><span>Redness (Erythema)</span><span>Day 1</span></div>
+                <div class="m-val">71.2 / 100</div>
+              </div>
+              <div class="metric-box">
+                <div class="m-label"><span>Radiance (Luminosity)</span><span>Day 1</span></div>
+                <div class="m-val">68.7 / 100</div>
+              </div>
+              <div class="metric-box">
+                <div class="m-label"><span>Texture (Smoothness)</span><span>Day 1</span></div>
+                <div class="m-val">67.4 / 100</div>
+              </div>
+              <div class="metric-box">
+                <div class="m-label"><span>Pores Visibility</span><span>Day 1</span></div>
+                <div class="m-val">74.0 / 100</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="caption">Capture a baseline face scan with YouCam Skin AI v2.1 before starting the product.</div>
+      </section>
+
+      <!-- SCENE 3: FOLLOW-UP SCAN -->
+      <section class="scene" data-i="3">
+        <div class="brand">
+          <div class="brand-icon">✦</div>
+          <span>Pruv</span>
+        </div>
+        <div class="network">
+          <span class="pill youcam">Step 02 · 21-Day Follow-up</span>
+        </div>
+        <div class="inner">
+          <div class="eyebrow rise">02 · Return on Day 21</div>
+          <h2 class="title rise delay1">Same contract. Real observation.</h2>
+          <div class="hud-board rise delay2">
+            <div class="viewfinder">
+              <div class="face-oval">
+                <div class="laser"></div>
+                <div style="width:8px;height:8px;border-radius:50%;background:#10B981"></div>
+              </div>
+              <div style="font:800 13px 'Manrope';color:#10B981;margin-top:14px">✓ DAY 21 MATCH VERIFIED</div>
+            </div>
+            <div class="hud-metrics">
+              <div class="metric-box" style="border-color:#A7F3D0;background:#F0FDF4">
+                <div class="m-label"><span>Redness Score</span><span style="color:#10B981;font-weight:800">Improved</span></div>
+                <div class="m-val" style="color:#047857">79.8 / 100</div>
+              </div>
+              <div class="metric-box" style="border-color:#A7F3D0;background:#F0FDF4">
+                <div class="m-label"><span>Radiance Score</span><span style="color:#10B981;font-weight:800">Improved</span></div>
+                <div class="m-val" style="color:#047857">72.0 / 100</div>
+              </div>
+              <div class="metric-box" style="border-color:#A7F3D0;background:#F0FDF4">
+                <div class="m-label"><span>Texture Smoothness</span><span style="color:#10B981;font-weight:800">Improved</span></div>
+                <div class="m-val" style="color:#047857">68.1 / 100</div>
+              </div>
+              <div class="metric-box">
+                <div class="m-label"><span>Deterministic Math</span><span>Delta</span></div>
+                <div class="m-val" style="color:#5B4FE8">Δ = F - B</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="caption">Use the product normally, then take a follow-up scan under matching guidance.</div>
+      </section>
+
+      <!-- SCENE 4: PROOF REVIEW RECEIPT -->
+      <section class="scene" data-i="4">
+        <div class="brand">
+          <div class="brand-icon">✦</div>
+          <span>Pruv</span>
+        </div>
+        <div class="network">
+          <span class="pill youcam">Step 03 · Proof Review</span>
+        </div>
+        <div class="inner">
+          <div class="eyebrow rise">03 · Verified Artifact</div>
+          <h2 class="title rise delay1">Opinion + Measurement in one receipt.</h2>
+          <div class="proof-stage rise delay2">
+            <!-- Left Summary -->
+            <div style="text-align:left">
+              <h3 style="font:800 32px 'Manrope';margin:0 0 12px">Niacinamide 10%</h3>
+              <p style="font-size:18px;color:#52525B;line-height:1.45;margin:0 0 20px">
+                “Skin felt calmer and visibly more radiant by the end of week two.”
+              </p>
+              <div style="display:flex;gap:12px;font:700 15px 'Manrope'">
+                <span class="pill">★★★★★ 4.5/5</span>
+                <span class="pill">Buy Again: Yes</span>
+              </div>
+            </div>
+
+            <div style="font-size:36px;color:#5B4FE8;text-align:center">➔</div>
+
+            <!-- Right Receipt Card -->
+            <div class="receipt">
+              <div class="receipt-head">
+                <div class="p-img">🧴</div>
+                <div>
+                  <div style="font:800 18px 'Manrope'">Niacinamide 10% Serum</div>
+                  <div style="font:600 13px 'Manrope';color:#71717A">21-Day Measured Proof Review</div>
+                </div>
+              </div>
+              <div style="margin-top:14px">
+                <div class="score-row">
+                  <span>☀️ Redness score</span>
+                  <span style="font-family:monospace;color:#71717A">71.2 → 79.8</span>
+                  <span class="delta orange">+8.6</span>
+                </div>
+                <div class="score-row">
+                  <span>🌟 Radiance score</span>
+                  <span style="font-family:monospace;color:#71717A">68.7 → 72.0</span>
+                  <span class="delta">+3.3</span>
+                </div>
+                <div class="score-row">
+                  <span>✨ Texture score</span>
+                  <span style="font-family:monospace;color:#71717A">67.4 → 68.1</span>
+                  <span class="delta blue">+0.7</span>
+                </div>
+              </div>
+              <div style="text-align:center;font:700 12px 'Manrope';color:#A1A1AA;margin-top:16px">
+                🪄 Measured with Perfect Corp. YouCam Skin AI v2.1 🪄
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="caption">Pruv computes exact score deltas and combines them with your authentic rating.</div>
+      </section>
+
+      <!-- SCENE 5: FINALE & LIVE APP -->
+      <section class="scene" data-i="5">
+        <div class="grid"></div>
+        <div class="inner">
+          <div class="eyebrow rise">Hackathon Ready · Live Demo</div>
+          <div class="hero-logo rise delay1" style="font-size:110px">
+            <div class="hero-mark" style="width:90px;height:90px;border-radius:26px;font-size:50px">✦</div>
+            <span>Pruv</span>
+          </div>
+          <p class="serif-sub rise delay1" style="font-size:32px;margin-top:14px">
+            The new measured review format for skincare products.
+          </p>
+          <div class="final-proofs rise delay2">
+            <span class="proofchip">Product-Agnostic Engine</span>
+            <span class="proofchip">Dual YouCam Observations</span>
+            <span class="proofchip">Deterministic Deltas</span>
+            <span class="proofchip">Shareable ProofLinks</span>
+          </div>
+          <div class="cta-box rise delay3">pruv.nikhilraikwar.me</div>
+          <div class="links rise delay3">
+            <span>github.com/NikhilRaikwar/Pruv</span>
+            <span>YouCam AI Skin AI Hackathon</span>
+          </div>
+        </div>
+        <div class="caption">Pruv is live on Vercel. Try the judge demo and explore a measured Proof Review.</div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Player Controls -->
+  <nav class="controls">
+    <button class="btn primary" id="play">Play</button>
+    <button class="btn" id="pause">Pause</button>
+    <button class="btn" id="restart">Restart</button>
+    <button class="btn" id="prev">←</button>
+    <button class="btn" id="next">→</button>
+    <button class="btn" id="mute">Voice on</button>
+    <button class="btn" id="full">Fullscreen</button>
+    <div class="timeline" id="timeline"><div class="progress" id="progress"></div></div>
+    <div class="dots" id="dots"></div>
+    <span class="time" id="time">00:00 / 00:48</span>
+  </nav>
+</div>
+
+<script>
+const scenes = [...document.querySelectorAll('.scene')];
+const duration = 48000; // 48s total (8s per scene)
+const sceneMs = 8000;
+let elapsed = 0;
+let sceneElapsed = 0;
+let playing = false;
+let last = 0;
+let index = 0;
+let muted = false;
+let voiceDone = true;
+let raf;
+
+const lines = [
+  "Pruv turns a skincare product trial into a measured Proof Review.",
+  "Most skincare reviews are purely subjective opinions with zero verifiable baseline.",
+  "Capture a baseline face scan with YouCam Skin AI v2.1 before starting the product.",
+  "Use the product normally, then take a follow-up scan under matching guidance.",
+  "Pruv computes exact score deltas and combines them with your authentic rating.",
+  "Pruv is live on Vercel. Try the judge demo and explore a measured Proof Review."
+];
+
+const stage = document.querySelector('#stage');
+const wrap = document.querySelector('#wrap');
+const progress = document.querySelector('#progress');
+const time = document.querySelector('#time');
+const dots = document.querySelector('#dots');
+const btnPlay = document.querySelector('#play');
+const btnPause = document.querySelector('#pause');
+const btnRestart = document.querySelector('#restart');
+const btnPrev = document.querySelector('#prev');
+const btnNext = document.querySelector('#next');
+const btnMute = document.querySelector('#mute');
+const btnFull = document.querySelector('#full');
+const timeline = document.querySelector('#timeline');
+
+scenes.forEach((_, i) => dots.insertAdjacentHTML('beforeend', `<i class="dot ${i === 0 ? 'on' : ''}"></i>`));
+
+function scale() {
+  const full = document.fullscreenElement === wrap;
+  const s = Math.min(wrap.clientWidth / 1920, wrap.clientHeight / 1080);
+  stage.style.transform = full ? `translate(-50%,-50%) scale(${s})` : `scale(${s})`;
+}
+
+function speak(i) {
+  speechSynthesis.cancel();
+  voiceDone = muted || !('speechSynthesis' in window);
+  if (voiceDone) return;
+  const u = new SpeechSynthesisUtterance(lines[i]);
+  u.rate = 0.96;
+  u.pitch = 0.95;
+  u.onend = () => voiceDone = true;
+  u.onerror = () => voiceDone = true;
+  const vs = speechSynthesis.getVoices();
+  const maleNames = /ravi|david|mark|guy|daniel|ryan|george|james|male/i;
+  const v = vs.find(x => x.lang === 'en-IN' && maleNames.test(x.name)) ||
+            vs.find(x => /^en-(GB|US)$/.test(x.lang) && maleNames.test(x.name)) ||
+            vs.find(x => /^en-/.test(x.lang) && maleNames.test(x.name)) ||
+            vs.find(x => x.lang === 'en-IN') ||
+            vs.find(x => x.lang === 'en-GB') ||
+            vs.find(x => x.lang === 'en-US');
+  if (v) u.voice = v;
+  speechSynthesis.speak(u);
+}
+
+function show(i, voice = true) {
+  index = Math.max(0, Math.min(5, i));
+  scenes.forEach((s, n) => s.classList.toggle('active', n === index));
+  [...dots.children].forEach((d, n) => d.classList.toggle('on', n === index));
+  elapsed = index * sceneMs;
+  sceneElapsed = 0;
+  update();
+  if (voice) speak(index);
+  else voiceDone = true;
+}
+
+function update() {
+  progress.style.width = `${Math.min(100, (elapsed / duration) * 100)}%`;
+  const s = Math.floor(elapsed / 1000);
+  const m = Math.floor(s / 60);
+  const ss = s % 60;
+  time.textContent = `${String(m).padStart(2, '0')}:${String(ss).padStart(2, '0')} / 00:48`;
+}
+
+function tick(t) {
+  if (!playing) return;
+  if (!last) last = t;
+  const delta = t - last;
+  sceneElapsed += delta;
+  last = t;
+  elapsed = index * sceneMs + Math.min(sceneElapsed, sceneMs);
+
+  if (sceneElapsed >= sceneMs && voiceDone) {
+    if (index === 5) {
+      elapsed = duration;
+      playing = false;
+      speechSynthesis.cancel();
+    } else {
+      index++;
+      sceneElapsed = 0;
+      elapsed = index * sceneMs;
+      scenes.forEach((s, n) => s.classList.toggle('active', n === index));
+      [...dots.children].forEach((d, n) => d.classList.toggle('on', n === index));
+      speak(index);
+    }
+  }
+
+  update();
+  if (playing) raf = requestAnimationFrame(tick);
+}
+
+function startPlayback() {
+  if (elapsed >= duration) show(0, false);
+  if (!playing) {
+    playing = true;
+    last = 0;
+    speak(index);
+    raf = requestAnimationFrame(tick);
+  }
+}
+
+function pausePlayback() {
+  playing = false;
+  cancelAnimationFrame(raf);
+  speechSynthesis.cancel();
+}
+
+timeline.onclick = (e) => {
+  const rect = timeline.getBoundingClientRect();
+  const clickX = e.clientX - rect.left;
+  const pct = Math.max(0, Math.min(1, clickX / rect.width));
+  const newIndex = Math.min(5, Math.floor(pct * 6));
+  pausePlayback();
+  show(newIndex, true);
+};
+
+btnPlay.onclick = startPlayback;
+btnPause.onclick = pausePlayback;
+btnRestart.onclick = () => {
+  pausePlayback();
+  show(0, false);
+  startPlayback();
+};
+btnPrev.onclick = () => {
+  pausePlayback();
+  show(index - 1);
+};
+btnNext.onclick = () => {
+  pausePlayback();
+  show(index + 1);
+};
+btnMute.onclick = () => {
+  muted = !muted;
+  btnMute.textContent = muted ? 'Voice off' : 'Voice on';
+  if (muted) {
+    speechSynthesis.cancel();
+    voiceDone = true;
+  }
+};
+btnFull.onclick = () => {
+  if (document.fullscreenElement) {
+    document.exitFullscreen();
+  } else {
+    wrap.requestFullscreen();
+  }
+};
+
+addEventListener('resize', scale);
+document.addEventListener('fullscreenchange', scale);
+document.addEventListener('keydown', e => {
+  if (e.code === 'Space') {
+    e.preventDefault();
+    playing ? pausePlayback() : startPlayback();
+  }
+  if (e.key === 'ArrowLeft') {
+    pausePlayback();
+    show(index - 1);
+  }
+  if (e.key === 'ArrowRight') {
+    pausePlayback();
+    show(index + 1);
+  }
+  if (e.key.toLowerCase() === 'r') {
+    pausePlayback();
+    show(0, false);
+    startPlayback();
+  }
+  if (e.key.toLowerCase() === 'm') btnMute.click();
+  if (e.key.toLowerCase() === 'f') btnFull.click();
+});
+
+scale();
+setTimeout(startPlayback, 300);
+</script>
+</body>
+</html>
