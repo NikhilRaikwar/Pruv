@@ -1,0 +1,37 @@
+# Environment Variables
+.env
+.env.*
+!.env.example
+.env*.local
+
+# Next.js Build & Cache
+.next/
+out/
+build/
+dist/
+
+# Dependencies
+node_modules/
+
+# IDE & Editor Files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Testing & Coverage
+coverage/
+*.tsbuildinfo
+.playwright-mcp/
+
+# Agent & AI Customizations
+.agents/
+skills-lock.json
+.gemini/
+
+# Operating System Files
+.DS_Store
+Thumbs.db
