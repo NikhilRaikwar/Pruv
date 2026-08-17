@@ -60,7 +60,6 @@ export function ScanClient({ scanType }: { scanType: ScanType }) {
 
   const [stream, setStream] = useState<MediaStream | null>(null);
   const [cameraActive, setCameraActive] = useState<boolean>(false);
-  const [permissionDenied, setPermissionDenied] = useState<boolean>(false);
   const [capturedImage, setCapturedImage] = useState<string | null>(null);
   const [status, setStatus] = useState<"idle" | "preview" | "uploading" | "analyzing" | "error">("idle");
   const [error, setError] = useState<string | null>(null);
