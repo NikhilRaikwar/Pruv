@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+  <rect width="32" height="32" rx="9" fill="url(#pruv-grad)" />
+  <path d="M16 5L18.4 13.6L27 16L18.4 18.4L16 27L13.6 18.4L5 16L13.6 13.6L16 5Z" fill="#FFFFFF" />
+  <circle cx="23" cy="9" r="1.5" fill="#FFFFFF" opacity="0.8" />
+  <defs>
+    <linearGradient id="pruv-grad" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#6E62F6" />
+      <stop offset="1" stop-color="#4335D6" />
+    </linearGradient>
+  </defs>
+</svg>
