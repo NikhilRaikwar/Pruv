@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { notFound } from 'next/navigation';
 import { requireParticipant } from '@/lib/participant/current';
 import { getSupabaseAdmin } from '@/lib/supabase/server';
 import { Reveal, Logo } from '@/components/ui';
@@ -15,7 +14,6 @@ export default async function MyProofPage() {
     .eq('participant_trial_id', participant.id)
     .eq('status', 'success');
 
-  const hasBaseline = scans?.some((s) => s.scan_type === 'baseline') ?? false;
   const hasFollowup = scans?.some((s) => s.scan_type === 'followup') ?? false;
 
   // Calculate target date (e.g. 21 days from baseline)

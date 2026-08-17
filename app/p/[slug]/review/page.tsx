@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useParams, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Reveal, Logo } from "@/components/ui";
 
@@ -15,7 +15,6 @@ const RATING_LABELS: Record<number, string> = {
 };
 
 export default function ReviewPage() {
-  const params = useParams<{ slug: string }>();
   const router = useRouter();
 
   const [rating, setRating] = useState<number>(4);

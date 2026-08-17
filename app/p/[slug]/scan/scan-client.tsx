@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useParams, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState, useCallback } from "react";
 import { Reveal, Logo } from "@/components/ui";
 
@@ -19,7 +19,6 @@ async function optimizeFaceForYouCam(source: Blob | File | string): Promise<{ bl
       const ctx = canvas.getContext("2d");
       if (!ctx) return reject(new Error("Canvas context failed"));
 
-      // Zoom in to face region (take central 65% of image so face fills > 60% of frame)
       const cropFactor = 0.65;
       const cropW = img.width * cropFactor;
       const cropH = img.height * cropFactor;
@@ -53,7 +52,6 @@ async function optimizeFaceForYouCam(source: Blob | File | string): Promise<{ bl
 
 export function ScanClient({ scanType }: { scanType: ScanType }) {
   const router = useRouter();
-  const params = useParams<{ slug: string }>();
   
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -231,7 +229,7 @@ export function ScanClient({ scanType }: { scanType: ScanType }) {
   }
 
   // Process photo blob with real YouCam API
-  async function processPhotoBlob(imageBlob: Blob, imageDataUrl?: string) {
+  async function processPhotoBlob(imageBlob: Blob) {
     setStatus("uploading");
     setError(null);
     setAnalysisStep("Requesting YouCam upload slot...");
