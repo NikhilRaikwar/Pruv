@@ -188,18 +188,40 @@ export default function DemoPage() {
 
                 <Link
                   href="/start"
-                  className="inline-flex items-center justify-center py-3.5 px-6 rounded-2xl bg-white hover:bg-[#FAF9F7] active:scale-[0.98] text-[#18181B] border border-[#ECE7DE] font-bold text-sm shadow-[0_2px_8px_rgba(0,0,0,0.04)] transition-all cursor-pointer"
+                  className="inline-flex items-center justify-center py-3.5 px-6 rounded-xl bg-white hover:bg-[#F9F8F6] active:scale-[0.98] text-[#18181B] border border-[#DDD8D0] font-bold text-sm shadow-[0_2px_8px_rgba(0,0,0,0.04)] transition-all cursor-pointer"
                 >
                   Start Live Scan
                 </Link>
               </div>
 
               {/* Camera Frame Viewfinder Mockup */}
-              <div className="bg-[#F7F4FF] rounded-3xl p-6 sm:p-7 border border-[#E9E4FC] flex flex-col items-center justify-center text-center shadow-xs">
-                <div className="w-44 h-48 sm:w-48 sm:h-52 border-2 border-dashed border-[#C4B7FA] rounded-[32px] flex flex-col items-center justify-center relative mb-4 bg-white/40">
-                  {/* Oval Face Guide */}
-                  <div className="w-24 h-32 sm:w-28 sm:h-36 border-[2.5px] border-[#5B4FE8] rounded-[50%/60%] flex items-center justify-center shadow-xs">
-                    <div className="w-2.5 h-2.5 rounded-full bg-[#5B4FE8]" />
+              <div className="bg-[#F8F6FF] rounded-3xl p-6 sm:p-7 border border-[#E9E4FC] flex flex-col items-center justify-center text-center shadow-xs">
+                {/* Viewfinder Outer Frame with Corner Brackets */}
+                <div className="w-48 h-52 sm:w-52 sm:h-56 border-2 border-dashed border-[#C4B7FA] rounded-[28px] flex flex-col items-center justify-center relative mb-4 bg-white/50 backdrop-blur-xs overflow-hidden">
+                  {/* Top Live Badge */}
+                  <div className="absolute top-2.5 px-2.5 py-0.5 rounded-full bg-[#5B4FE8]/10 border border-[#5B4FE8]/20 text-[9.5px] font-bold text-[#5B4FE8] flex items-center gap-1">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#10B981] animate-pulse" />
+                    AI Ready
+                  </div>
+
+                  {/* Corner Accent Marks */}
+                  <div className="absolute top-2 left-2 w-3 h-3 border-t-2 border-l-2 border-[#5B4FE8] rounded-tl-sm" />
+                  <div className="absolute top-2 right-2 w-3 h-3 border-t-2 border-r-2 border-[#5B4FE8] rounded-tr-sm" />
+                  <div className="absolute bottom-2 left-2 w-3 h-3 border-b-2 border-l-2 border-[#5B4FE8] rounded-bl-sm" />
+                  <div className="absolute bottom-2 right-2 w-3 h-3 border-b-2 border-r-2 border-[#5B4FE8] rounded-br-sm" />
+
+                  {/* Biometric Oval Face Guide with Landmark Points */}
+                  <div className="w-24 h-32 sm:w-28 sm:h-36 border-2 border-[#5B4FE8] rounded-[50%/60%] flex flex-col items-center justify-center relative shadow-xs">
+                    {/* Horizontal Scan Beam */}
+                    <div className="absolute inset-x-0 h-0.5 bg-gradient-to-r from-transparent via-[#818CF8] to-transparent top-1/2 -translate-y-1/2 opacity-70" />
+                    
+                    {/* Center Pupil Focus Point */}
+                    <div className="w-2.5 h-2.5 rounded-full bg-[#5B4FE8] shadow-sm z-10" />
+
+                    {/* Landmark Dots */}
+                    <div className="absolute top-6 left-5 w-1.5 h-1.5 rounded-full bg-[#818CF8]" />
+                    <div className="absolute top-6 right-5 w-1.5 h-1.5 rounded-full bg-[#818CF8]" />
+                    <div className="absolute bottom-8 w-1.5 h-1.5 rounded-full bg-[#818CF8]" />
                   </div>
                 </div>
 
@@ -208,19 +230,22 @@ export default function DemoPage() {
                 </p>
 
                 {/* 3 Action Buttons */}
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-2xl bg-white text-base flex items-center justify-center shadow-xs border border-[#ECE7DE] text-[#52525B]">
+                <div className="flex items-center gap-3.5">
+                  {/* Gallery Upload */}
+                  <button type="button" className="w-10 h-10 rounded-2xl bg-white hover:bg-[#FAF9F7] text-base flex items-center justify-center shadow-xs border border-[#ECE7DE] text-[#52525B] active:scale-95 transition-all">
                     🖼️
-                  </div>
-                  <div className="w-12 h-12 rounded-full bg-[#5B4FE8] text-white flex items-center justify-center shadow-[0_4px_14px_rgba(91,79,232,0.35)]">
+                  </button>
+                  {/* Capture Shutter Button */}
+                  <button type="button" className="w-12 h-12 rounded-full bg-gradient-to-tr from-[#5B4FE8] to-[#7B6EF6] text-white flex items-center justify-center shadow-[0_4px_16px_rgba(91,79,232,0.4)] active:scale-95 hover:shadow-[0_6px_20px_rgba(91,79,232,0.5)] transition-all ring-4 ring-[#5B4FE8]/15">
                     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
                       <circle cx="12" cy="13" r="4" />
                     </svg>
-                  </div>
-                  <div className="w-10 h-10 rounded-2xl bg-white text-base flex items-center justify-center shadow-xs border border-[#ECE7DE] text-[#EA580C]">
+                  </button>
+                  {/* Flash Toggle */}
+                  <button type="button" className="w-10 h-10 rounded-2xl bg-white hover:bg-[#FAF9F7] text-base flex items-center justify-center shadow-xs border border-[#ECE7DE] text-[#EA580C] active:scale-95 transition-all">
                     ⚡
-                  </div>
+                  </button>
                 </div>
               </div>
             </div>

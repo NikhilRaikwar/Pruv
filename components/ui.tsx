@@ -4,7 +4,7 @@ import React, { ReactNode } from "react";
 import Link from "next/link";
 import { motion } from "motion/react";
 
-export function LogoMark({ className = "w-6 h-6", size = 24 }: { className?: string; size?: number }) {
+export function LogoMark({ className = "w-7 h-7", size = 28 }: { className?: string; size?: number }) {
   return (
     // eslint-disable-next-line @next/next/no-img-element
     <img
@@ -18,7 +18,7 @@ export function LogoMark({ className = "w-6 h-6", size = 24 }: { className?: str
         minWidth: `${size}px`,
         minHeight: `${size}px`,
       }}
-      className={`inline-block flex-shrink-0 object-contain rounded-[7px] shadow-sm ${className}`}
+      className={`inline-block flex-shrink-0 object-contain rounded-lg shadow-xs ${className}`}
     />
   );
 }
@@ -30,13 +30,13 @@ export function Logo({
   className?: string;
   size?: "sm" | "default" | "lg";
 }) {
-  const pixelSize = size === "sm" ? 20 : size === "lg" ? 28 : 24;
-  const textSize = size === "sm" ? "text-sm" : size === "lg" ? "text-lg" : "text-base";
+  const pixelSize = size === "sm" ? 22 : size === "lg" ? 34 : 28;
+  const textSize = size === "sm" ? "text-base font-bold" : size === "lg" ? "text-2xl font-black" : "text-[19px] sm:text-xl font-extrabold";
 
   return (
-    <span className={`inline-flex items-center gap-2 font-extrabold text-[#18181B] tracking-tight ${textSize} ${className}`}>
+    <span className={`inline-flex items-center gap-2.5 text-[#18181B] tracking-[-0.035em] ${textSize} ${className}`}>
       <LogoMark size={pixelSize} />
-      <span>Pruv</span>
+      <span className="leading-none text-[#18181B]">Pruv</span>
     </span>
   );
 }
