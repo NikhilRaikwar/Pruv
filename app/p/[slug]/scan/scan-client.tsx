@@ -171,8 +171,10 @@ export function ScanClient({ scanType }: { scanType: ScanType }) {
           setCapturedImage(dataUrl);
           try {
             if (scanType === "baseline") {
+              localStorage.setItem("pruv_baseline_photo", dataUrl);
               sessionStorage.setItem("pruv_baseline_photo", dataUrl);
             } else {
+              localStorage.setItem("pruv_followup_photo", dataUrl);
               sessionStorage.setItem("pruv_followup_photo", dataUrl);
             }
           } catch {}
@@ -183,8 +185,10 @@ export function ScanClient({ scanType }: { scanType: ScanType }) {
           setCapturedImage(rawDataUrl);
           try {
             if (scanType === "baseline") {
+              localStorage.setItem("pruv_baseline_photo", rawDataUrl);
               sessionStorage.setItem("pruv_baseline_photo", rawDataUrl);
             } else {
+              localStorage.setItem("pruv_followup_photo", rawDataUrl);
               sessionStorage.setItem("pruv_followup_photo", rawDataUrl);
             }
           } catch {}
@@ -214,8 +218,10 @@ export function ScanClient({ scanType }: { scanType: ScanType }) {
       setCapturedImage(dataUrl);
       try {
         if (scanType === "baseline") {
+          localStorage.setItem("pruv_baseline_photo", dataUrl);
           sessionStorage.setItem("pruv_baseline_photo", dataUrl);
         } else {
+          localStorage.setItem("pruv_followup_photo", dataUrl);
           sessionStorage.setItem("pruv_followup_photo", dataUrl);
         }
       } catch {}
@@ -228,8 +234,10 @@ export function ScanClient({ scanType }: { scanType: ScanType }) {
         setCapturedImage(dataUrl);
         try {
           if (scanType === "baseline") {
+            localStorage.setItem("pruv_baseline_photo", dataUrl);
             sessionStorage.setItem("pruv_baseline_photo", dataUrl);
           } else {
+            localStorage.setItem("pruv_followup_photo", dataUrl);
             sessionStorage.setItem("pruv_followup_photo", dataUrl);
           }
         } catch {}

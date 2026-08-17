@@ -21,6 +21,7 @@ export default function ReviewPage() {
   const [wouldBuyAgain, setWouldBuyAgain] = useState<boolean | null>(true);
   const [reviewText, setReviewText] = useState<string>("Skin felt calmer by the end of week two.");
   const [observationalConsent, setObservationalConsent] = useState<boolean>(true);
+  const [includePhotos, setIncludePhotos] = useState<boolean>(true);
   const [largestChange, setLargestChange] = useState<{ concern: string; delta: number }>({
     concern: "Redness",
     delta: 8.6,
@@ -87,6 +88,16 @@ export default function ReviewPage() {
       if (!response.ok) {
         setError(data.error ?? "Could not save review");
         return;
+      }
+
+      if (!includePhotos) {
+        try {
+          localStorage.setItem("pruv_hide_photos", "true");
+        } catch {}
+      } else {
+        try {
+          localStorage.removeItem("pruv_hide_photos");
+        } catch {}
       }
 
       router.push(data.next);
@@ -158,95 +169,86 @@ export default function ReviewPage() {
                 </h2>
 
                 {/* 21-day trial completed badge */}
-                <div className="inline-flex items-center gap-1.5 px-2.5 py-1 mt-2 mb-3 rounded-lg bg-[#F4F1FC] text-[#5B4FE8] text-xs font-semibold">
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                    <circle cx="12" cy="12" r="10" />
-                    <polyline points="16 9 10 15 7 12" />
-                  </svg>
-                  21-day trial completed
+                <div className="flex items-center gap-2 mt-2">
+                  <span className="rounded-lg bg-[#F4F1FC] px-2.5 py-1 text-xs font-bold text-[#5B4FE8]">
+                    21-day trial completed
+                  </span>
                 </div>
 
-                {/* Divider */}
-                <div className="w-full border-t border-[#F0EDF6] mb-3" />
-
-                {/* Trend item */}
-                <div className="flex items-center gap-2.5">
-                  <div className="w-6 h-6 rounded-lg bg-[#F5F2FF] text-[#5B4FE8] flex items-center justify-center flex-shrink-0">
-                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                      <polyline points="23 6 13.5 15.5 8.5 10.5 1 18" />
-                      <polyline points="17 6 23 6 23 12" />
-                    </svg>
-                  </div>
-                  <p className="text-xs text-[#71717A]">
-                    Largest observed change:{" "}
-                    <strong className="text-[#18181B] font-bold">{largestChange.concern} </strong>
-                    <span className="text-[#EA580C] font-extrabold font-mono">
-                      {largestChange.delta > 0 ? `+${largestChange.delta.toFixed(1)}` : largestChange.delta.toFixed(1)}
-                    </span>
-                  </p>
+                {/* Largest measured skin change preview */}
+                <div className="mt-2.5 flex items-center gap-1.5 text-xs text-[#71717A]">
+                  <span>✨ Largest change:</span>
+                  <span className="font-bold text-[#18181B]">
+                    {largestChange.concern} ({largestChange.delta > 0 ? "+" : ""}{largestChange.delta.toFixed(1)})
+                  </span>
                 </div>
               </div>
             </div>
 
-            <form onSubmit={handleSubmit} className="space-y-6 pt-6">
-              {/* Question 1: Rating */}
+            {/* Questions Form */}
+            <form onSubmit={handleSubmit} className="pt-6 space-y-7">
+              {/* Question 1: Star Rating */}
               <div>
-                <div className="flex items-center gap-2.5 mb-3">
-                  <div className="w-6 h-6 rounded-full bg-[#5B4FE8] text-white text-xs font-bold flex items-center justify-center">
-                    1
+                <div className="flex items-center justify-between mb-3.5">
+                  <div className="flex items-center gap-2.5">
+                    <div className="w-6 h-6 rounded-full bg-[#5B4FE8] text-white text-xs font-bold flex items-center justify-center">
+                      1
+                    </div>
+                    <h3 className="text-base font-bold text-[#18181B]">
+                      Overall, how was it?
+                    </h3>
                   </div>
-                  <h3 className="text-base font-bold text-[#18181B]">
-                    How would you rate it?
-                  </h3>
+                  <span className="text-xs font-bold text-[#5B4FE8] bg-[#F4F1FC] px-2.5 py-0.5 rounded-full">
+                    {RATING_LABELS[rating]}
+                  </span>
                 </div>
 
-                <div className="flex flex-col items-center justify-center py-2">
-                  <div className="flex items-center gap-2 sm:gap-3">
-                    {[1, 2, 3, 4, 5].map((star) => (
-                      <button
-                        key={star}
-                        type="button"
-                        onClick={() => setRating(star)}
-                        className="p-1 focus:outline-none transition-transform hover:scale-115 cursor-pointer"
+                {/* Interactive Star Selection */}
+                <div className="flex items-center gap-3">
+                  {[1, 2, 3, 4, 5].map((star) => (
+                    <button
+                      key={star}
+                      type="button"
+                      onClick={() => setRating(star)}
+                      className="group p-2 rounded-xl hover:bg-[#FAF9F6] transition-all cursor-pointer"
+                      aria-label={`${star} star`}
+                    >
+                      <svg
+                        width="36"
+                        height="36"
+                        viewBox="0 0 24 24"
+                        fill={star <= rating ? "#F59E0B" : "none"}
+                        stroke={star <= rating ? "#F59E0B" : "#D4D4D8"}
+                        strokeWidth="1.5"
+                        className="transition-transform group-hover:scale-110 group-active:scale-95"
                       >
-                        {star <= rating ? (
-                          <span className="text-4xl sm:text-5xl text-[#F59E0B] select-none">
-                            ★
-                          </span>
-                        ) : (
-                          <span className="text-4xl sm:text-5xl text-[#D4D4D8] select-none">
-                            ☆
-                          </span>
-                        )}
-                      </button>
-                    ))}
-                  </div>
-
-                  <p className="text-xs font-semibold text-[#71717A] mt-2">
-                    {RATING_LABELS[rating] ?? "Great"}
-                  </p>
+                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                      </svg>
+                    </button>
+                  ))}
                 </div>
               </div>
 
               {/* Divider */}
               <div className="w-full border-t border-[#F0EDF6]" />
 
-              {/* Question 2: Would Buy Again */}
+              {/* Question 2: Would Buy Again? */}
               <div>
                 <div className="flex items-center gap-2.5 mb-3.5">
                   <div className="w-6 h-6 rounded-full bg-[#5B4FE8] text-white text-xs font-bold flex items-center justify-center">
                     2
                   </div>
                   <h3 className="text-base font-bold text-[#18181B]">
-                    Would you buy it again?
+                    Would you buy this again?
                   </h3>
                 </div>
 
+                {/* Yes / Unsure / No Pills */}
                 <div className="grid grid-cols-3 gap-3">
                   {[
-                    { value: true, label: "Yes" },
-                    { value: false, label: "No" },
-                    { value: null, label: "Not sure" },
+                    { label: "Yes", value: true },
+                    { label: "Unsure", value: null },
+                    { label: "No", value: false },
                   ].map((option) => {
                     const isSelected = wouldBuyAgain === option.value;
                     return (
@@ -300,8 +302,22 @@ export default function ReviewPage() {
                 </div>
               </div>
 
-              {/* Observational Consent Checkbox */}
-              <div className="pt-1">
+              {/* Photo & Observational Consent Options */}
+              <div className="pt-1 space-y-3.5 border-t border-[#F0EDF6]">
+                <label className="flex items-start gap-3 cursor-pointer select-none group">
+                  <input
+                    type="checkbox"
+                    checked={includePhotos}
+                    onChange={(e) => setIncludePhotos(e.target.checked)}
+                    className="w-4.5 h-4.5 mt-0.5 rounded border-[#D4D4D8] text-[#5B4FE8] focus:ring-[#5B4FE8] cursor-pointer"
+                  />
+                  <p className="text-xs text-[#71717A] leading-relaxed group-hover:text-[#18181B] transition-colors">
+                    <span className="font-semibold text-[#18181B]">Include my Before &amp; After scan photos on the Proof Receipt</span>
+                    <br />
+                    Display my verified trial face photos alongside measured YouCam Skin AI scores.
+                  </p>
+                </label>
+
                 <label className="flex items-start gap-3 cursor-pointer select-none group">
                   <input
                     type="checkbox"

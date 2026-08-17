@@ -18,15 +18,21 @@ export function FaceThumbnail({
   useEffect(() => {
     if (storageKey && typeof window !== "undefined") {
       try {
-        const stored = sessionStorage.getItem(storageKey);
-        if (stored && stored.startsWith("data:image/")) {
+        const isHidden = localStorage.getItem("pruv_hide_photos") === "true";
+        if (isHidden) {
+          setSrc(fallbackSrc);
+          return;
+        }
+
+        const stored = localStorage.getItem(storageKey) || sessionStorage.getItem(storageKey);
+        if (stored && (stored.startsWith("data:image/") || stored.startsWith("http") || stored.startsWith("/"))) {
           setSrc(stored);
         }
       } catch {
         // Ignore storage access errors
       }
     }
-  }, [storageKey]);
+  }, [storageKey, fallbackSrc]);
 
   return (
     // eslint-disable-next-line @next/next/no-img-element
