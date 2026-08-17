@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { requireParticipant } from '@/lib/participant/current';
 import { getSupabaseAdmin } from '@/lib/supabase/server';
 import { Reveal, Logo } from '@/components/ui';
+import { FaceThumbnail } from '@/components/FaceThumbnail';
 
 const DEFAULT_METRIC_SCORES = [
   { concern: 'redness', label: 'Redness', score: 71.2, barColor: 'bg-[#EA580C]', iconBg: 'bg-[#FFF5ED]', iconColor: 'text-[#EA580C]' },
@@ -82,9 +83,9 @@ export default async function BaselinePage() {
               <div className="flex items-center gap-4">
                 {/* Face Thumbnail with HUD brackets */}
                 <div className="relative w-20 h-24 rounded-2xl overflow-hidden bg-[#F4F1EC] border border-[#ECE8E1] flex-shrink-0 shadow-inner">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={facePhoto}
+                  <FaceThumbnail
+                    storageKey="pruv_baseline_photo"
+                    fallbackSrc={facePhoto}
                     alt="Baseline Face Scan"
                     className="w-full h-full object-cover"
                   />

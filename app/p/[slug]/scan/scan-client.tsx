@@ -169,11 +169,25 @@ export function ScanClient({ scanType }: { scanType: ScanType }) {
           // Auto-frame for YouCam requirement
           const { blob: optimizedBlob, dataUrl } = await optimizeFaceForYouCam(rawBlob);
           setCapturedImage(dataUrl);
+          try {
+            if (scanType === "baseline") {
+              sessionStorage.setItem("pruv_baseline_photo", dataUrl);
+            } else {
+              sessionStorage.setItem("pruv_followup_photo", dataUrl);
+            }
+          } catch {}
           setStatus("preview");
           await processPhotoBlob(optimizedBlob);
         } catch {
           const rawDataUrl = canvas.toDataURL("image/jpeg", 0.95);
           setCapturedImage(rawDataUrl);
+          try {
+            if (scanType === "baseline") {
+              sessionStorage.setItem("pruv_baseline_photo", rawDataUrl);
+            } else {
+              sessionStorage.setItem("pruv_followup_photo", rawDataUrl);
+            }
+          } catch {}
           setStatus("preview");
           await processPhotoBlob(rawBlob);
         }
@@ -198,6 +212,13 @@ export function ScanClient({ scanType }: { scanType: ScanType }) {
       setAnalysisStep("Auto-framing photo for Skin AI...");
       const { blob: optimizedBlob, dataUrl } = await optimizeFaceForYouCam(file);
       setCapturedImage(dataUrl);
+      try {
+        if (scanType === "baseline") {
+          sessionStorage.setItem("pruv_baseline_photo", dataUrl);
+        } else {
+          sessionStorage.setItem("pruv_followup_photo", dataUrl);
+        }
+      } catch {}
       await processPhotoBlob(optimizedBlob);
     } catch (err) {
       console.warn("Auto-frame error, using original file:", err);
@@ -205,6 +226,13 @@ export function ScanClient({ scanType }: { scanType: ScanType }) {
       reader.onload = async (event) => {
         const dataUrl = event.target?.result as string;
         setCapturedImage(dataUrl);
+        try {
+          if (scanType === "baseline") {
+            sessionStorage.setItem("pruv_baseline_photo", dataUrl);
+          } else {
+            sessionStorage.setItem("pruv_followup_photo", dataUrl);
+          }
+        } catch {}
         setStatus("preview");
         await processPhotoBlob(file);
       };

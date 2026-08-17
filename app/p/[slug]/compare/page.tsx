@@ -3,6 +3,7 @@ import { requireParticipant } from '@/lib/participant/current';
 import { compareMetrics } from '@/lib/proof/compare';
 import { getSupabaseAdmin } from '@/lib/supabase/server';
 import { Reveal, Logo } from '@/components/ui';
+import { FaceThumbnail } from '@/components/FaceThumbnail';
 
 const DEFAULT_METRIC_ROWS = [
   { concern: 'redness', label: 'Redness score', before: 71.2, after: 79.8, delta: 8.6, iconBg: 'bg-[#FFF5ED]', iconColor: 'text-[#EA580C]', deltaColor: 'text-[#EA580C]' },
@@ -103,9 +104,9 @@ export default async function ComparePage() {
                     Before &bull; Day 1
                   </p>
                   <div className="relative w-36 h-48 sm:w-44 sm:h-52 rounded-2xl overflow-hidden bg-[#F4F1EC] border border-[#ECE8E1] shadow-inner">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src={baselinePhoto}
+                    <FaceThumbnail
+                      storageKey="pruv_baseline_photo"
+                      fallbackSrc={baselinePhoto}
                       alt="Baseline scan"
                       className="w-full h-full object-cover"
                     />
@@ -117,9 +118,9 @@ export default async function ComparePage() {
                     After &bull; Day 21
                   </p>
                   <div className="relative w-36 h-48 sm:w-44 sm:h-52 rounded-2xl overflow-hidden bg-[#F4F1EC] border border-[#ECE8E1] shadow-inner">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src={followupPhoto}
+                    <FaceThumbnail
+                      storageKey="pruv_followup_photo"
+                      fallbackSrc={followupPhoto}
                       alt="Follow-up scan"
                       className="w-full h-full object-cover"
                     />

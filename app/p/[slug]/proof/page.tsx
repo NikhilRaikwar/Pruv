@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Reveal, Logo, LogoMark } from "@/components/ui";
+import { FaceThumbnail } from "@/components/FaceThumbnail";
 
 type MetricItem = {
   concern: string;
@@ -374,9 +375,9 @@ export default function ProofPage() {
                     Day 1
                   </span>
                   <div className="relative w-20 h-24 sm:w-24 sm:h-28 rounded-xl overflow-hidden bg-[#F4F1EC] border border-[#ECE8E1] shadow-inner">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src={review?.baselinePhoto || "/day1_real.jpg"}
+                    <FaceThumbnail
+                      storageKey="pruv_baseline_photo"
+                      fallbackSrc={review?.baselinePhoto || "/day1_real.jpg"}
                       alt="Day 1 scan"
                       className="w-full h-full object-cover"
                     />
@@ -391,9 +392,9 @@ export default function ProofPage() {
                     Day {review?.trialDays ?? 21}
                   </span>
                   <div className="relative w-20 h-24 sm:w-24 sm:h-28 rounded-xl overflow-hidden bg-[#F4F1EC] border-2 border-[#5B4FE8]/40 shadow-inner">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src={review?.followupPhoto || "/day21_after.jpg"}
+                    <FaceThumbnail
+                      storageKey="pruv_followup_photo"
+                      fallbackSrc={review?.followupPhoto || "/day21_after.jpg"}
                       alt="Day 21 scan"
                       className="w-full h-full object-cover"
                     />
