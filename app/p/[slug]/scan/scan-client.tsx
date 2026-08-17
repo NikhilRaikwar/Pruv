@@ -71,6 +71,7 @@ export function ScanClient({ scanType }: { scanType: ScanType }) {
     return () => {
       if (pollIntervalRef.current) {
         clearInterval(pollIntervalRef.current);
+        pollIntervalRef.current = null;
       }
     };
   }, []);
@@ -171,12 +172,12 @@ export function ScanClient({ scanType }: { scanType: ScanType }) {
           const { blob: optimizedBlob, dataUrl } = await optimizeFaceForYouCam(rawBlob);
           setCapturedImage(dataUrl);
           setStatus("preview");
-          await processPhotoBlob(optimizedBlob, dataUrl);
+          await processPhotoBlob(optimizedBlob);
         } catch {
           const rawDataUrl = canvas.toDataURL("image/jpeg", 0.95);
           setCapturedImage(rawDataUrl);
           setStatus("preview");
-          await processPhotoBlob(rawBlob, rawDataUrl);
+          await processPhotoBlob(rawBlob);
         }
       },
       "image/jpeg",
@@ -199,7 +200,7 @@ export function ScanClient({ scanType }: { scanType: ScanType }) {
       setAnalysisStep("Auto-framing photo for Skin AI...");
       const { blob: optimizedBlob, dataUrl } = await optimizeFaceForYouCam(file);
       setCapturedImage(dataUrl);
-      await processPhotoBlob(optimizedBlob, dataUrl);
+      await processPhotoBlob(optimizedBlob);
     } catch (err) {
       console.warn("Auto-frame error, using original file:", err);
       const reader = new FileReader();
@@ -207,7 +208,7 @@ export function ScanClient({ scanType }: { scanType: ScanType }) {
         const dataUrl = event.target?.result as string;
         setCapturedImage(dataUrl);
         setStatus("preview");
-        await processPhotoBlob(file, dataUrl);
+        await processPhotoBlob(file);
       };
       reader.readAsDataURL(file);
     }
