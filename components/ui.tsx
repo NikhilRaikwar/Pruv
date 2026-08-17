@@ -65,7 +65,7 @@ export function ProductNav() {
         </Link>
 
         <nav className="hidden sm:flex items-center gap-5 text-[13px] font-medium text-[#52525B]">
-          <Link href="/#how" className="hover:text-[#18181B] transition-colors">
+          <Link href="/how" className="hover:text-[#18181B] transition-colors">
             How it works
           </Link>
           <Link href="/demo" className="hover:text-[#18181B] transition-colors">

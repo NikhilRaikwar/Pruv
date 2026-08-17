@@ -376,7 +376,7 @@ export default function LandingPage() {
             <Logo />
           </Link>
           <div className="foot-links flex flex-wrap items-center justify-center gap-6">
-            <Link href="/#how" style={{fontSize: '13.5px', color: 'var(--ink-soft)', fontWeight: 500}}>How it works</Link>
+            <Link href="/how" style={{fontSize: '13.5px', color: 'var(--ink-soft)', fontWeight: 500}}>How it works</Link>
             <Link href="/demo" style={{fontSize: '13.5px', color: 'var(--ink-soft)', fontWeight: 500}}>Demo</Link>
             <Link href="/privacy" style={{fontSize: '13.5px', color: 'var(--ink-soft)', fontWeight: 500}}>Privacy</Link>
             <Link href="/terms" style={{fontSize: '13.5px', color: 'var(--ink-soft)', fontWeight: 500}}>Terms</Link>
