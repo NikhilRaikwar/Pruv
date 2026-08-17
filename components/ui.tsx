@@ -44,38 +44,27 @@ export function Logo({
 export function Reveal({
   children,
   className = "",
-  delay = 0,
 }: {
   children: ReactNode;
   className?: string;
   delay?: number;
 }) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 16 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{
-        duration: 0.45,
-        ease: [0.21, 0.47, 0.32, 0.98],
-        delay,
-      }}
-      className={className}
-    >
+    <div className={className}>
       {children}
-    </motion.div>
+    </div>
   );
 }
 
 export function ProductNav() {
   return (
-    <header className="max-w-[580px] mx-auto pt-6 px-4 mb-8">
-      <div className="bg-white/95 backdrop-blur-md border border-[#E9E4DC] shadow-[0_4px_24px_rgba(0,0,0,0.05)] rounded-full px-5 py-2.5 flex items-center justify-between">
-        <Link href="/" className="hover:opacity-90 transition-opacity">
-          <Logo />
+    <header className="max-w-[580px] w-full mx-auto mb-8 sm:mb-12">
+      <div className="bg-white/95 backdrop-blur-md border border-[#E9E4DC] shadow-[0_4px_24px_rgba(0,0,0,0.05)] rounded-full px-3.5 sm:px-5 py-2 sm:py-2.5 flex items-center justify-between gap-2 sm:gap-4">
+        <Link href="/" className="hover:opacity-90 transition-opacity flex-shrink-0">
+          <Logo size="sm" />
         </Link>
 
-        <nav className="flex items-center gap-6 text-[13.5px] font-medium text-[#52525B]">
+        <nav className="hidden sm:flex items-center gap-5 text-[13px] font-medium text-[#52525B]">
           <Link href="/#how" className="hover:text-[#18181B] transition-colors">
             How it works
           </Link>
@@ -86,9 +75,9 @@ export function ProductNav() {
 
         <Link
           href="/start"
-          className="bg-[#5B4FE8] hover:bg-[#4E42DC] text-white text-xs font-semibold px-4 py-2 rounded-full shadow-[0_2px_10px_rgba(91,79,232,0.28)] transition-all"
+          className="bg-[#5B4FE8] hover:bg-[#4E42DC] text-white text-[11.5px] sm:text-xs font-semibold px-3 sm:px-4 py-1.5 sm:py-2 rounded-full shadow-[0_2px_10px_rgba(91,79,232,0.28)] transition-all flex-shrink-0"
         >
-          Start a Proof Review
+          Start Review
         </Link>
       </div>
     </header>

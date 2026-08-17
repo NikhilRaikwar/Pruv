@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState, useCallback } from "react";
-import { Reveal, Logo } from "@/components/ui";
+import { Reveal, ProductNav } from "@/components/ui";
 
 type ScanType = "baseline" | "followup";
 
@@ -416,29 +416,7 @@ export function ScanClient({ scanType }: { scanType: ScanType }) {
       <canvas ref={canvasRef} className="hidden" />
 
       {/* Top Floating Capsule Navbar */}
-      <header className="max-w-[580px] mx-auto mb-12 sm:mb-16">
-        <div className="bg-white/95 backdrop-blur-md border border-[#E9E4DC] shadow-[0_4px_24px_rgba(0,0,0,0.05)] rounded-full px-5 py-2.5 flex items-center justify-between">
-          <Link href="/" className="hover:opacity-90 transition-opacity">
-            <Logo />
-          </Link>
-
-          <nav className="flex items-center gap-6 text-[13.5px] font-medium text-[#52525B]">
-            <Link href="/#how" className="hover:text-[#18181B] transition-colors">
-              How it works
-            </Link>
-            <Link href="/demo" className="hover:text-[#18181B] transition-colors">
-              Demo
-            </Link>
-          </nav>
-
-          <Link
-            href="/start"
-            className="bg-[#5B4FE8] hover:bg-[#4E42DC] text-white text-xs font-semibold px-4 py-2 rounded-full shadow-[0_2px_10px_rgba(91,79,232,0.28)] transition-all"
-          >
-            Start a Proof Review
-          </Link>
-        </div>
-      </header>
+      <ProductNav />
 
       {/* Main Container */}
       <main className="max-w-[760px] mx-auto">

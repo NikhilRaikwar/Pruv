@@ -2,62 +2,45 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { Reveal, Logo } from '@/components/ui';
+import { Reveal, Logo, ProductNav } from '@/components/ui';
 
 export default function LandingPage() {
   return (
     <>
-      <header className="top-nav" style={{padding: '24px 0 0'}}>
-        <div className="wrap flex items-center justify-between" style={{width: '100%'}}>
-          <Link href="#top" className="logo hover:opacity-90 transition-opacity" style={{textDecoration: 'none'}}>
-            <Logo />
-          </Link>
-          <nav className="nav-links" style={{display: 'flex', alignItems: 'center', gap: '36px'}}>
-            <Link href="#how" style={{fontSize: '14px', fontWeight: 500, color: 'var(--ink-soft)'}}>How it works</Link>
-            <Link href="#demo" style={{fontSize: '14px', fontWeight: 500, color: 'var(--ink-soft)'}}>Demo</Link>
-          </nav>
-          <div className="nav-actions" style={{display: 'flex', alignItems: 'center', gap: '20px'}}>
-            <Link href="/start" className="btn btn-primary" style={{borderRadius: '10px', padding: '11px 22px', fontSize: '13.5px', fontWeight: 600, display: 'inline-flex', alignItems: 'center', textDecoration: 'none'}}>
-              Start a Proof Review
-            </Link>
-            <Link href="https://github.com/NikhilRaikwar/Pruv" target="_blank" rel="noopener noreferrer" style={{display: 'inline-flex', alignItems: 'center', gap: '8px', fontSize: '14px', color: 'var(--ink)', fontWeight: 500}}>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-              GitHub
-            </Link>
-          </div>
-        </div>
-      </header>
+      <div className="pt-6 px-4 sm:px-6">
+        <ProductNav />
+      </div>
 
       <main id="top">
         {/* HERO SECTION */}
-        <section className="hero" style={{padding: '56px 0 100px'}}>
+        <section className="hero" style={{padding: '24px 0 80px'}}>
           <div className="wrap split-layout items-center">
-            <Reveal className="hero-text">
-              <div className="eyebrow-text" style={{display: 'inline-flex', alignItems: 'center', gap: '8px', fontSize: '11px', fontWeight: 600, color: 'var(--ink-soft)', letterSpacing: '0.05em', marginBottom: '20px'}}>
+            <Reveal className="hero-text text-center md:text-left">
+              <div className="eyebrow-text mx-auto md:mx-0" style={{display: 'inline-flex', alignItems: 'center', gap: '8px', fontSize: '11px', fontWeight: 600, color: 'var(--ink-soft)', letterSpacing: '0.05em', marginBottom: '16px'}}>
                 <span className="pulse-dot" style={{background: 'var(--accent)', width: '6px', height: '6px', borderRadius: '50%'}} />
                 MEASURED SKINCARE REVIEWS
               </div>
-              <h1 className="display" style={{fontSize: 'clamp(52px, 6vw, 76px)', lineHeight: 1.04, letterSpacing: '-0.045em', fontWeight: 700, marginBottom: '24px'}}>
+              <h1 className="display" style={{fontSize: 'clamp(34px, 7vw, 68px)', lineHeight: 1.08, letterSpacing: '-0.04em', fontWeight: 700, marginBottom: '20px'}}>
                 Did it actually<br/>work for you?
               </h1>
-              <p className="hero-desc" style={{margin: '0 0 36px'}}>
-                <span className="serif italic" style={{fontSize: '28px', lineHeight: 1.25, color: 'var(--ink)', display: 'block', marginBottom: '20px'}}>
+              <div className="hero-desc" style={{margin: '0 0 28px'}}>
+                <span className="serif italic mx-auto md:mx-0" style={{fontSize: 'clamp(19px, 4vw, 26px)', lineHeight: 1.3, color: 'var(--ink)', display: 'block', marginBottom: '16px'}}>
                   Turn a skincare trial into a review backed by your own before-and-after skin data.
                 </span>
-                <span style={{color: 'var(--ink-soft)', fontSize: '15.5px', lineHeight: 1.6, display: 'block', maxWidth: '440px'}}>
+                <span className="mx-auto md:mx-0" style={{color: 'var(--ink-soft)', fontSize: '14.5px', lineHeight: 1.6, display: 'block', maxWidth: '440px'}}>
                   Scan before you start, use the product regularly, then scan again. Pruv turns the change into a Proof Review scored by YouCam Skin AI.
                 </span>
-              </p>
+              </div>
               
-              <div className="hero-actions" style={{display: 'flex', alignItems: 'center', gap: '14px', marginBottom: '20px'}}>
-                <Link href="/start" className="btn btn-primary" style={{padding: '16px 28px', fontSize: '15px', borderRadius: '10px', fontWeight: 600, display: 'inline-flex', alignItems: 'center', textDecoration: 'none'}}>
+              <div className="hero-actions flex flex-col sm:flex-row items-stretch sm:items-center justify-center md:justify-start gap-3 mb-5">
+                <Link href="/start" className="btn btn-primary justify-center text-center" style={{padding: '14px 26px', fontSize: '14.5px', borderRadius: '12px', fontWeight: 600, textDecoration: 'none'}}>
                   Start a Proof Review
                 </Link>
-                <Link href="#demo" className="btn btn-outline" style={{padding: '16px 28px', fontSize: '15px', background: '#FFF', borderRadius: '10px', border: '1px solid var(--line)', fontWeight: 600, boxShadow: '0 2px 8px rgba(0,0,0,0.04)', display: 'inline-flex', alignItems: 'center', textDecoration: 'none'}}>
+                <Link href="#demo" className="btn btn-outline justify-center text-center" style={{padding: '14px 26px', fontSize: '14.5px', background: '#FFF', borderRadius: '12px', border: '1px solid var(--line)', fontWeight: 600, boxShadow: '0 2px 8px rgba(0,0,0,0.04)', textDecoration: 'none'}}>
                   See Demo &nbsp;&rarr;
                 </Link>
               </div>
-              <div style={{fontSize: '12.5px', color: 'var(--muted)'}}>
+              <div className="text-center md:text-left" style={{fontSize: '12px', color: 'var(--muted)'}}>
                 No signup &middot; Browser based &middot; ~33 sec per scan
               </div>
             </Reveal>
@@ -387,14 +370,17 @@ export default function LandingPage() {
         </section>
       </main>
 
-      <footer style={{padding: '36px 0', borderTop: 'none'}}>
-        <div className="wrap flex items-center justify-between" style={{width: '100%'}}>
-          <Link href="#top" className="logo" style={{fontSize: '18px', display: 'flex', alignItems: 'center', gap: '8px'}}>
-            <span className="pulse-dot" style={{background: 'var(--accent)', width: '6px', height: '6px'}} />
-            Pruv
+      <footer style={{padding: '40px 0', borderTop: '1px solid var(--line)', background: 'var(--bg)'}}>
+        <div className="wrap flex flex-col sm:flex-row items-center justify-between gap-6" style={{width: '100%'}}>
+          <Link href="#top" className="logo hover:opacity-90 transition-opacity" style={{textDecoration: 'none'}}>
+            <Logo />
           </Link>
-          <div className="foot-links">
-            <Link href="https://github.com" target="_blank" rel="noopener noreferrer" style={{display: 'inline-flex', alignItems: 'center', gap: '8px', fontSize: '14px', color: 'var(--ink-soft)', fontWeight: 500}}>
+          <div className="foot-links flex flex-wrap items-center justify-center gap-6">
+            <Link href="/#how" style={{fontSize: '13.5px', color: 'var(--ink-soft)', fontWeight: 500}}>How it works</Link>
+            <Link href="/demo" style={{fontSize: '13.5px', color: 'var(--ink-soft)', fontWeight: 500}}>Demo</Link>
+            <Link href="/privacy" style={{fontSize: '13.5px', color: 'var(--ink-soft)', fontWeight: 500}}>Privacy</Link>
+            <Link href="/terms" style={{fontSize: '13.5px', color: 'var(--ink-soft)', fontWeight: 500}}>Terms</Link>
+            <Link href="https://github.com/NikhilRaikwar/Pruv" target="_blank" rel="noopener noreferrer" style={{display: 'inline-flex', alignItems: 'center', gap: '8px', fontSize: '13.5px', color: 'var(--ink)', fontWeight: 500}}>
               <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
               GitHub
             </Link>
