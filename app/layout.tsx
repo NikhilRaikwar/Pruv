@@ -70,24 +70,35 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "https://pruv.nikhilraikwar.me",
     siteName: "Pruv",
-    title: "Pruv — Measured Skincare Reviews Powered by YouCam AI",
+    title: "Pruv — Skincare Reviews You Can Measure",
     description:
-      "A new review format for skincare products: real product trials backed by before/after YouCam AI Skin measurements. Reviews backed by real measured trial data.",
+      "Turn your skincare product trials into measured reviews backed by before/after Perfect Corp. YouCam AI Skin Analysis.",
     images: [
       {
-        url: "/pruv-banner.png",
+        url: "https://pruv.nikhilraikwar.me/pruv-banner.png",
+        secureUrl: "https://pruv.nikhilraikwar.me/pruv-banner.png",
         width: 1200,
         height: 630,
-        alt: "Pruv Measured Skincare Reviews",
+        type: "image/png",
+        alt: "Pruv — Skincare Reviews You Can Measure",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Pruv — Measured Skincare Reviews",
+    site: "@pruv",
+    creator: "@nikhilraikwar",
+    title: "Pruv — Skincare Reviews You Can Measure",
     description:
-      "Real skincare trials backed by before/after Perfect Corp. YouCam Skin AI measurements.",
-    images: ["/pruv-banner.png"],
+      "Turn your skincare product trials into measured reviews backed by before/after Perfect Corp. YouCam AI Skin Analysis.",
+    images: [
+      {
+        url: "https://pruv.nikhilraikwar.me/pruv-banner.png",
+        width: 1200,
+        height: 630,
+        alt: "Pruv — Skincare Reviews You Can Measure",
+      },
+    ],
   },
   icons: {
     icon: "/icon.svg",
