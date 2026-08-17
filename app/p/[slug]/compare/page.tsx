@@ -18,15 +18,15 @@ export default async function ComparePage() {
 
   const { data: scans } = await supabase
     .from('scans')
-    .select('id, scan_type, status, image_data, scan_metrics (concern, raw_score, ui_score)')
+    .select('id, scan_type, status, scan_metrics (concern, raw_score, ui_score)')
     .eq('participant_trial_id', participant.id)
     .eq('status', 'success');
 
   const baselineScan = scans?.find((s) => s.scan_type === 'baseline');
   const followupScan = scans?.find((s) => s.scan_type === 'followup');
 
-  const baselinePhoto = baselineScan?.image_data || '/day1_real.jpg';
-  const followupPhoto = followupScan?.image_data || '/day21_real.jpg';
+  const baselinePhoto = '/day1_real.jpg';
+  const followupPhoto = '/day21_real.jpg';
 
   let rows = DEFAULT_METRIC_ROWS;
 

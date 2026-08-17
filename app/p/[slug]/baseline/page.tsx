@@ -17,14 +17,14 @@ export default async function BaselinePage() {
 
   const { data: scan } = await supabase
     .from('scans')
-    .select('completed_at, image_data, scan_metrics (concern, raw_score, ui_score)')
+    .select('completed_at, scan_metrics (concern, raw_score, ui_score)')
     .eq('participant_trial_id', participant.id)
     .eq('scan_type', 'baseline')
     .eq('status', 'success')
     .single();
 
   const metrics = scan?.scan_metrics ?? [];
-  const facePhoto = scan?.image_data || '/day1_real.jpg';
+  const facePhoto = '/day1_real.jpg';
 
   const displayList = DEFAULT_METRIC_SCORES.map((def) => {
     const found = metrics.find((m) => m.concern.toLowerCase() === def.concern);

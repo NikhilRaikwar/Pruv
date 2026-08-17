@@ -10,15 +10,8 @@ export async function GET() {
     const participant = await requireParticipant();
     const supabase = getSupabaseAdmin();
 
-    // Fetch scans for photos
-    const { data: scans } = await supabase
-      .from('scans')
-      .select('scan_type, image_data, captured_at')
-      .eq('participant_trial_id', participant.id)
-      .eq('status', 'success');
-
-    const baselinePhoto = scans?.find((s) => s.scan_type === 'baseline')?.image_data || '/day1_real.jpg';
-    const followupPhoto = scans?.find((s) => s.scan_type === 'followup')?.image_data || '/day21_real.jpg';
+    const baselinePhoto = '/day1_real.jpg';
+    const followupPhoto = '/day21_real.jpg';
 
     // 1. Check if proof_reviews exists
     const { data: review } = await supabase

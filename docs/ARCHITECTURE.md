@@ -25,7 +25,7 @@ flowchart LR
     B -->|5. file_id| S
     S -->|6. Create analysis task| Y
     Y -->|7. task_id| S
-    S -->|8. Structured scores & photos| D
+    S -->|8. Structured scores only| D
     D --> C
     C --> P
 ```
@@ -127,7 +127,6 @@ erDiagram
         text status
         text youcam_task_id
         text analysis_mode
-        text image_data
     }
 
     SCAN_METRICS {

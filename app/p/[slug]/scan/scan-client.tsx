@@ -306,7 +306,6 @@ export function ScanClient({ scanType }: { scanType: ScanType }) {
         body: JSON.stringify({
           fileId,
           scanType,
-          imageData: imageDataUrl || capturedImage || undefined,
         }),
       });
 

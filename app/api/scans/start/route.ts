@@ -10,7 +10,6 @@ const bodySchema = z.object({
   fileId: z.string().min(1),
   scanType: z.enum(['baseline', 'followup']),
   cameraKitUsed: z.boolean().default(false),
-  imageData: z.string().optional(),
 });
 
 export async function POST(request: Request) {
@@ -46,7 +45,6 @@ export async function POST(request: Request) {
           youcam_task_id: taskId,
           youcam_api_version: HD_CONTRACT.apiVersion,
           camera_kit_used: parsed.data.cameraKitUsed ?? false,
-          image_data: parsed.data.imageData ?? null,
           captured_at: now,
         },
         { onConflict: 'participant_trial_id,scan_type' },

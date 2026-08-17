@@ -5,7 +5,7 @@
 Pruv is not a generic skin scanner, AI dermatologist, or clinical diagnosis tool. It is a new review format for skincare products: a real human product trial backed by before-and-after skin measurements.
 
 - **Website**: https://pruv.vercel.app
-- **Repository**: https://github.com/nikhil/pruv
+- **Repository**: https://github.com/NikhilRaikwar/Pruv
 - **API Engine**: Perfect Corp. YouCam AI Skin Analysis v2.1
 - **Database**: Supabase Postgres
 - **License**: MIT
@@ -50,7 +50,7 @@ Measured with Perfect Corp. YouCam Skin AI v2.1
   - `hd_acne`: Active acne, papules & pustules
   - `hd_pore`: Enlarged pore visibility across facial regions
 - **Database**: Supabase (PostgreSQL with Row Level Security & Participant UUID Tokens)
-- **AI Synthesis**: OpenRouter DeepSeek V3 for observational review summaries
+- **AI Synthesis**: OpenRouter DeepSeek V3 / GPT-4o-mini for observational review summaries
 
 ---
 
@@ -72,13 +72,14 @@ Measured with Perfect Corp. YouCam Skin AI v2.1
 
 ## 🔌 API Endpoints
 
-- `POST /api/participant/start`: Create a new participant trial session
+- `POST /api/trials/start`: Create a new participant trial session
+- `POST /api/proofs/join`: Join an existing trial by slug
 - `POST /api/youcam/upload-slot`: Request presigned S3 upload URL from YouCam API
 - `POST /api/scans/start`: Initialize a YouCam Skin Analysis v2.1 task
 - `GET /api/scans/[scanId]/status`: Poll YouCam task completion & save normalized scores
 - `POST /api/reviews`: Save participant qualitative experience & ratings
 - `POST /api/reviews/publish`: Generate shareable public slug for the Proof Review
-- `GET /api/proof-receipts`: Fetch structured receipt data and scan photos
+- `GET /api/proof-receipts`: Fetch structured receipt data
 
 ---
 
@@ -86,4 +87,4 @@ Measured with Perfect Corp. YouCam Skin AI v2.1
 
 1. **Observational, Not Diagnostic**: Pruv clearly states that results are observational measurements of skin surface appearance, not clinical medical diagnoses.
 2. **Deterministic Deltas**: Changes between Day 1 and Day 21 are calculated as direct mathematical deltas (`Followup Score - Baseline Score`).
-3. **No Fake Reviews**: Every Proof Review is strictly tied to real YouCam API vision analysis on actual captured photos.
+3. **Evidence-Based Reviews**: Every Proof Review is strictly tied to real YouCam API vision analysis on actual captured photos.

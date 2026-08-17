@@ -17,18 +17,10 @@ export type PublicProofReview = {
       trial_days: number;
       title?: string;
     };
-    scans?: Array<{
-      scan_type: string;
-      image_data: string | null;
-    }>;
   };
 };
 
 export function projectPublicReview(review: PublicProofReview) {
-  const scans = review.participant_trial?.scans ?? [];
-  const baselineScan = scans.find((s) => s.scan_type === 'baseline');
-  const followupScan = scans.find((s) => s.scan_type === 'followup');
-
   return {
     slug: review.public_slug,
     rating: review.rating ?? 5,
@@ -37,8 +29,8 @@ export function projectPublicReview(review: PublicProofReview) {
     metricSummary: review.metric_summary,
     createdAt: review.created_at,
     publishedAt: review.published_at,
-    baselinePhoto: baselineScan?.image_data || '/day1_real.jpg',
-    followupPhoto: followupScan?.image_data || '/day21_real.jpg',
+    baselinePhoto: '/day1_real.jpg',
+    followupPhoto: '/day21_real.jpg',
     trial: {
       title: review.participant_trial?.trial?.title ?? review.participant_trial?.trial?.product_name ?? 'Niacinamide 10% Serum',
       productName: review.participant_trial?.trial?.product_name ?? 'Niacinamide 10% Serum',
@@ -70,10 +62,6 @@ export async function getPublicReceipt(slug: string) {
           title,
           product_name,
           trial_days
-        ),
-        scans:scans (
-          scan_type,
-          image_data
         )
       )
     `,
@@ -101,10 +89,6 @@ export async function getPublicReceipt(slug: string) {
           title,
           product_name,
           trial_days
-        ),
-        scans:scans (
-          scan_type,
-          image_data
         )
       )
     `,

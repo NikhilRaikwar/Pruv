@@ -72,7 +72,7 @@ export const metadata: Metadata = {
     siteName: "Pruv",
     title: "Pruv — Measured Skincare Reviews Powered by YouCam AI",
     description:
-      "A new review format for skincare products: real product trials backed by before/after YouCam AI Skin measurements. No fake reviews, just real measured proof.",
+      "A new review format for skincare products: real product trials backed by before/after YouCam AI Skin measurements. Reviews backed by real measured trial data.",
     images: [
       {
         url: "/pruv-banner.png",
