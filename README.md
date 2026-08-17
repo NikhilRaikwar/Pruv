@@ -103,6 +103,10 @@ YouCam provides the **measurement primitive** for a true longitudinal review:
 
 ## 🏗️ System Architecture
 
+<p align="center">
+  <img src="./public/pruv-architecture.png" alt="Pruv Real Product Architecture Diagram" width="100%" />
+</p>
+
 ```mermaid
 flowchart LR
     B[Browser Camera / Upload]

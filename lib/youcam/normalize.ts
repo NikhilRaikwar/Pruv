@@ -24,7 +24,7 @@ function getNumber(value: unknown): number | null {
 }
 
 function getOutput(response: unknown): unknown[] {
-  const data = response as {
+  const data = (response ?? {}) as {
     data?: {
       results?: {
         output?: unknown[];
@@ -35,6 +35,7 @@ function getOutput(response: unknown): unknown[] {
     results?: {
       output?: unknown[];
       outputs?: unknown[];
+      items?: unknown[];
     };
   };
 

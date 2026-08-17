@@ -8,6 +8,10 @@
 
 Pruv is an end-to-end longitudinal skincare trial and review platform powered by Perfect Corp. YouCam AI Skin Analysis v2.1.
 
+<p align="center">
+  <img src="../public/pruv-architecture.png" alt="Pruv Real Product Architecture Diagram" width="100%" />
+</p>
+
 ```mermaid
 flowchart LR
     B[Browser Camera / Upload]
